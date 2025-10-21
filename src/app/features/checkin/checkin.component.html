@@ -30,10 +30,9 @@
           <span>{{ label(tipo) }}</span>
         </div>
         
-        <!-- Status da câmera -->
-        <div class="camera-status" *ngIf="statusMsg">
+        <!-- Status da câmera - apenas quando há problemas -->
+        <div class="camera-status" *ngIf="statusMsg && (statusMsg.includes('Erro') || statusMsg.includes('Permissão') || statusMsg.includes('HTTPS') || statusMsg.includes('não suporta'))">
           <p>{{ statusMsg }}</p>
-          <button (click)="toggleDiagnostics()" class="btn-diag">🛠️ Ver diagnóstico</button>
           
           <!-- Botão para soluções HTTPS -->
           <button *ngIf="statusMsg.includes('HTTPS')" 
@@ -63,9 +62,6 @@
             🔄 Tentar Novamente
           </button>
         </div>
-
-        <!-- Painel de diagnóstico -->
-        <pre class="diag-panel" *ngIf="showDiagnostics">{{ diagnosticsText }}</pre>
       </div>
     </div>
 

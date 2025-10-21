@@ -21,8 +21,6 @@ export class CheckinComponent implements AfterViewInit, OnDestroy {
   ok = false;
   cameraPermissionGranted = false;
   showPermissionButton = false;
-  showDiagnostics = false;
-  diagnosticsText = '';
 
   now = new Date();
   private clockId: any;
@@ -196,40 +194,6 @@ export class CheckinComponent implements AfterViewInit, OnDestroy {
       setTimeout(() => this.startCamera(), 1000);
     } else {
       this.statusMsg = `Erro: ${e.message || e.name || 'Erro desconhecido'}`;
-    }
-  }
-
-  async buildDiagnostics(): Promise<string> {
-    const isSecure = (window as any).isSecureContext;
-    const ua = navigator.userAgent;
-    const hasMediaDevices = !!navigator.mediaDevices;
-    const hasModernGUM = !!navigator.mediaDevices?.getUserMedia;
-    const hasLegacyGUM = !!(navigator as any).getUserMedia;
-    const protocol = location.protocol;
-    const host = location.hostname;
-    let perm = 'desconhecido';
-    try {
-      if ((navigator as any).permissions?.query) {
-        const res = await (navigator as any).permissions.query({ name: 'camera' as any });
-        perm = res.state;
-      }
-    } catch {}
-    return [
-      `isSecureContext: ${isSecure}`,
-      `protocol: ${protocol}`,
-      `host: ${host}`,
-      `userAgent: ${ua}`,
-      `mediaDevices: ${hasMediaDevices}`,
-      `modern getUserMedia: ${hasModernGUM}`,
-      `legacy getUserMedia: ${hasLegacyGUM}`,
-      `permission(camera): ${perm}`
-    ].join('\n');
-  }
-
-  async toggleDiagnostics() {
-    this.showDiagnostics = !this.showDiagnostics;
-    if (this.showDiagnostics) {
-      this.diagnosticsText = await this.buildDiagnostics();
     }
   }
 

@@ -27,6 +27,7 @@ export class CheckinComponent implements AfterViewInit, OnDestroy {
   now = new Date();
   private clockId: any;
   private sub?: Subscription;
+  private cameraStream?: MediaStream;
   
   // CPF input functionality
   cpfDigits = '';
@@ -119,6 +120,9 @@ export class CheckinComponent implements AfterViewInit, OnDestroy {
       if (!stream) {
         throw error || new Error('getUserMedia não está disponível');
       }
+      
+      // Armazena o stream para cleanup posterior
+      this.cameraStream = stream;
       
       // Conecta o stream ao elemento de vídeo
       this.videoEl.nativeElement.srcObject = stream;
@@ -317,8 +321,31 @@ SOLUÇÕES:
   }
 
   ngOnDestroy() {
-    if (this.clockId) clearInterval(this.clockId);
+    // Para o relógio
+    if (this.clockId) {
+      clearInterval(this.clockId);
+    }
+    
+    // Cancela a subscription
     this.sub?.unsubscribe();
+    
+    // Para a câmera
+    if (this.cameraStream) {
+      this.cameraStream.getTracks().forEach(track => {
+        track.stop();
+      });
+      this.cameraStream = undefined;
+    }
+    
+    // Limpa o elemento de vídeo
+    if (this.videoEl?.nativeElement) {
+      this.videoEl.nativeElement.srcObject = null;
+    }
+    
+    // Para o SDK do Luxand
+    if (this.sdk.FSDK) {
+      this.sdk.stopCamera();
+    }
   }
 
   label(t: string) {

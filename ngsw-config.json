@@ -23,11 +23,42 @@
         "files": [
           "/assets/**",
           "/manifest.webmanifest"
+        ],
+        "urls": [
+          "/assets/img/**",
+          "/assets/luxand/**"
         ]
       }
     }
   ],
-  "dataGroups": []
+  "dataGroups": [
+    {
+      "name": "api-cache",
+      "urls": [
+        "/api/portalprestador/**",
+        "/rest/PORTALPRESTADOR/**"
+      ],
+      "cacheConfig": {
+        "strategy": "cacheFirst",
+        "maxSize": 100,
+        "maxAge": "7d",
+        "timeout": "10s"
+      }
+    },
+    {
+      "name": "images-cache",
+      "urls": [
+        "/assets/img/**",
+        "/assets/luxand/**"
+      ],
+      "cacheConfig": {
+        "strategy": "cacheFirst",
+        "maxSize": 50,
+        "maxAge": "30d",
+        "timeout": "5s"
+      }
+    }
+  ]
 }
 
 

@@ -190,7 +190,16 @@ export class FaceSdkService {
       try {
         console.log('📡 Fazendo chamada para API do Portal Prestador (auto-env)...');
 
-        // const results = resp?.results ?? [];
+        // Verifica se há dados offline primeiro
+        const offlineData = await this.getOfflinePortalData(filial);
+        if (offlineData && offlineData.length > 0) {
+          console.log('📦 Usando dados offline encontrados:', offlineData.length, 'registros');
+          await this.processPortalData(offlineData, filial);
+          this.seededOnce = true;
+          return;
+        }
+
+        // Se não há dados offline, tenta buscar online
         const params = new HttpParams().set('filial', filial);
         const headers = this.authHeaders();
 
@@ -214,22 +223,23 @@ export class FaceSdkService {
         
         console.log('📊 Resultados encontrados:', results.length);
 
-        for (const r of results) {
-          try {
-            const dataUrl = this.base64ToDataUrlJPEG(r.fotoBase64);
-            const pngAb = await this.dataUrlToPngArrayBuffer(dataUrl);
-            const nome = (r.nome || r.matricula || '').trim() || r.CPF || `id_${r.matricula}`;
-            this.saveAvatar(nome, dataUrl);
-            await this.registerFromArrayBuffer(pngAb, nome);
-            console.log('✅ Registrado:', nome);
-          } catch (e) {
-            console.warn('Seed: falha ao registrar', r?.matricula, e);
-          }
-          // small yield para não travar a UI
-          await new Promise(r => setTimeout(r, 0));
-        }
+        // Salva dados offline para uso futuro
+        await this.saveOfflinePortalData(filial, results);
+
+        await this.processPortalData(results, filial);
         this.seededOnce = true;
         console.log('🎉 Seed finalizado. Total processado:', results.length);
+      } catch (e) {
+        console.error('❌ Seed falhou:', e);
+        // Tenta usar dados offline mesmo se a API falhou
+        const offlineData = await this.getOfflinePortalData(filial);
+        if (offlineData && offlineData.length > 0) {
+          console.log('🔄 Tentando usar dados offline após falha da API...');
+          await this.processPortalData(offlineData, filial);
+          this.seededOnce = true;
+        } else {
+          throw e;
+        }
       } finally {
         this.seeding = false;
       }
@@ -243,6 +253,65 @@ export class FaceSdkService {
         console.log('✅ Seed do Portal Prestador concluído com sucesso');
       } catch (e) { 
         console.error('❌ Seed falhou:', e); 
+      }
+    }
+
+    /** Processa dados do portal (online ou offline) */
+    private async processPortalData(results: PortalFace[], filial: string) {
+      for (const r of results) {
+        try {
+          const dataUrl = this.base64ToDataUrlJPEG(r.fotoBase64);
+          const pngAb = await this.dataUrlToPngArrayBuffer(dataUrl);
+          const nome = (r.nome || r.matricula || '').trim() || r.CPF || `id_${r.matricula}`;
+          this.saveAvatar(nome, dataUrl);
+          await this.registerFromArrayBuffer(pngAb, nome);
+          console.log('✅ Registrado:', nome);
+        } catch (e) {
+          console.warn('Seed: falha ao registrar', r?.matricula, e);
+        }
+        // small yield para não travar a UI
+        await new Promise(r => setTimeout(r, 0));
+      }
+    }
+
+    /** Salva dados do portal offline para uso futuro */
+    private async saveOfflinePortalData(filial: string, data: PortalFace[]) {
+      try {
+        const key = `portalData_${filial}`;
+        const dataWithTimestamp = {
+          data,
+          timestamp: Date.now(),
+          filial
+        };
+        localStorage.setItem(key, JSON.stringify(dataWithTimestamp));
+        console.log('💾 Dados do portal salvos offline para filial:', filial);
+      } catch (e) {
+        console.warn('Erro ao salvar dados offline:', e);
+      }
+    }
+
+    /** Recupera dados do portal salvos offline */
+    private async getOfflinePortalData(filial: string): Promise<PortalFace[] | null> {
+      try {
+        const key = `portalData_${filial}`;
+        const stored = localStorage.getItem(key);
+        if (!stored) return null;
+
+        const parsed = JSON.parse(stored);
+        const maxAge = 7 * 24 * 60 * 60 * 1000; // 7 dias
+        const isExpired = Date.now() - parsed.timestamp > maxAge;
+
+        if (isExpired) {
+          console.log('🗑️ Dados offline expirados para filial:', filial);
+          localStorage.removeItem(key);
+          return null;
+        }
+
+        console.log('📦 Dados offline encontrados para filial:', filial, 'Registros:', parsed.data.length);
+        return parsed.data;
+      } catch (e) {
+        console.warn('Erro ao recuperar dados offline:', e);
+        return null;
       }
     }
 

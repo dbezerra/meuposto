@@ -5,8 +5,11 @@
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
+  "orientation": "portrait",
   "background_color": "#ffffff",
   "theme_color": "#0d9488",
+  "lang": "pt-BR",
+  "categories": ["productivity", "business"],
   "icons": [
     {
       "src": "assets/img/totvs-logo.png",
@@ -19,6 +22,14 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "assets/img/totvs-logo.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide"
     }
   ]
 }

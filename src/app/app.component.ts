@@ -27,6 +27,9 @@ export class AppComponent implements OnInit {
   private setupInstallPrompt() {
     if (typeof window === 'undefined') return;
 
+    // Limpa dados antigos do localStorage se necessário
+    this.clearOldInstallData();
+
     // Verifica se já foi instalado ou dispensado
     const installed = localStorage.getItem('pwaInstalled') === '1';
     const dismissed = localStorage.getItem('pwaInstallDismissed') === '1';
@@ -61,6 +64,29 @@ export class AppComponent implements OnInit {
     }, 3000);
   }
 
+  private clearOldInstallData() {
+    try {
+      // Remove dados antigos que podem estar causando problemas
+      const keysToCheck = [
+        'pwaInstalled',
+        'pwaInstallDismissed',
+        'luxandInstalled',
+        'luxandInstallDismissed',
+        'appInstalled',
+        'appInstallDismissed'
+      ];
+      
+      keysToCheck.forEach(key => {
+        if (localStorage.getItem(key)) {
+          console.log(`Clearing old install data: ${key}`);
+          localStorage.removeItem(key);
+        }
+      });
+    } catch (e) {
+      console.log('Error clearing old install data:', e);
+    }
+  }
+
   async install() {
     if (this.deferredPrompt) {
       // Instalação real via PWA
@@ -76,10 +102,26 @@ export class AppComponent implements OnInit {
       }
     } else {
       // Fallback: instruções para instalação manual
-      alert('Para instalar o Meu Posto:\n\n' +
-            'Chrome/Edge: Clique no ícone de instalação na barra de endereços\n' +
-            'Firefox: Clique no ícone "+" na barra de endereços\n' +
-            'Safari: Toque em "Compartilhar" e depois "Adicionar à Tela de Início"');
+      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+      const isSafari = /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);
+      
+      let message = 'Para instalar o Meu Posto:\n\n';
+      
+      if (isIOS || isSafari) {
+        message += '📱 iPad/iPhone:\n';
+        message += '1. Toque no botão "Compartilhar" (ícone de compartilhamento)\n';
+        message += '2. Role para baixo e toque em "Adicionar à Tela de Início"\n';
+        message += '3. Toque em "Adicionar" no canto superior direito\n\n';
+        message += '💻 Safari no Mac:\n';
+        message += '1. Clique em "Compartilhar" na barra de ferramentas\n';
+        message += '2. Selecione "Adicionar à Tela de Início"\n';
+      } else {
+        message += 'Chrome/Edge: Clique no ícone de instalação na barra de endereços\n';
+        message += 'Firefox: Clique no ícone "+" na barra de endereços\n';
+        message += 'Safari: Toque em "Compartilhar" e depois "Adicionar à Tela de Início"';
+      }
+      
+      alert(message);
       this.dismiss();
     }
   }

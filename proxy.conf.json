@@ -1,6 +1,6 @@
 {
   "/rest": {
-    "target": "http://127.0.0.1:9090",  
+    "target": "http://138.219.88.134:9090",  
     "secure": false,
     "changeOrigin": true,
     "logLevel": "debug"    

@@ -1,7 +1,7 @@
 {
-  "name": "Luxand Angular",
-  "short_name": "Luxand",
-  "description": "Reconhecimento facial offline com PWA",
+  "name": "Meu Posto",
+  "short_name": "Meu Posto",
+  "description": "Sistema de reconhecimento facial para controle de ponto",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",

@@ -188,7 +188,7 @@ export class FaceSdkService {
 
       this.seeding = true;
       try {
-        console.log('📡 Fazendo chamada para API do Portal Prestador...');
+        console.log('📡 Fazendo chamada para API do Portal Prestador: http://138.219.88.134:9090/rest/PORTALPRESTADOR/fotofunc');
 
         // const results = resp?.results ?? [];
         const params = new HttpParams().set('filial', filial);
@@ -196,7 +196,7 @@ export class FaceSdkService {
 
         // *** pega como TEXTO ***
         const raw = await firstValueFrom(
-          this.http.get('/rest/PORTALPRESTADOR/fotofunc', {
+          this.http.get('http://138.219.88.134:9090/rest/PORTALPRESTADOR/fotofunc', {
             params, headers, responseType: 'text'
           })
         );

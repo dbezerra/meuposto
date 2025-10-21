@@ -47,4 +47,8 @@ export class HomeComponent {
       case 'saida': return 'Saída';
     }
   }
+
+  avatar(nome: string) {
+    return this.sdk.getAvatar(nome) || 'assets/img/totvs-logo.png';
+  }
 }

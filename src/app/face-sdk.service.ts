@@ -219,6 +219,7 @@ export class FaceSdkService {
             const dataUrl = this.base64ToDataUrlJPEG(r.fotoBase64);
             const pngAb = await this.dataUrlToPngArrayBuffer(dataUrl);
             const nome = (r.nome || r.matricula || '').trim() || r.CPF || `id_${r.matricula}`;
+            this.saveAvatar(nome, dataUrl);
             await this.registerFromArrayBuffer(pngAb, nome);
             console.log('✅ Registrado:', nome);
           } catch (e) {
@@ -243,6 +244,22 @@ export class FaceSdkService {
       } catch (e) { 
         console.error('❌ Seed falhou:', e); 
       }
+    }
+
+    private avatarKey(name: string) {
+      return `avatar:${(name || '').trim()}`;
+    }
+
+    saveAvatar(name: string, dataUrl: string) {
+      try {
+        localStorage.setItem(this.avatarKey(name), dataUrl);
+      } catch {}
+    }
+
+    getAvatar(name: string): string | null {
+      try {
+        return localStorage.getItem(this.avatarKey(name));
+      } catch { return null; }
     }
 
     

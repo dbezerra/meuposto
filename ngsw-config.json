@@ -57,6 +57,18 @@
         "maxAge": "30d",
         "timeout": "5s"
       }
+    },
+    {
+      "name": "offline-fallback",
+      "urls": [
+        "/**"
+      ],
+      "cacheConfig": {
+        "strategy": "cacheFirst",
+        "maxSize": 200,
+        "maxAge": "1d",
+        "timeout": "3s"
+      }
     }
   ]
 }

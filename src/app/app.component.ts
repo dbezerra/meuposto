@@ -34,7 +34,13 @@ export class AppComponent implements OnInit {
     const installed = localStorage.getItem('pwaInstalled') === '1';
     const dismissed = localStorage.getItem('pwaInstallDismissed') === '1';
     
-    if (installed || dismissed) {
+    // Verifica se o app está rodando como PWA instalado
+    const isStandalone = window.matchMedia('(display-mode: standalone)').matches || 
+                        (window.navigator as any).standalone === true ||
+                        document.referrer.includes('android-app://');
+    
+    if (installed || dismissed || isStandalone) {
+      console.log('Install prompt skipped - already installed, dismissed, or running as PWA');
       return;
     }
 
@@ -57,7 +63,7 @@ export class AppComponent implements OnInit {
     // Fallback: mostra o banner após 3 segundos se não houve beforeinstallprompt
     // Isso funciona para desenvolvimento ou quando os critérios PWA não são atendidos
     setTimeout(() => {
-      if (!this.deferredPrompt && !installed && !dismissed) {
+      if (!this.deferredPrompt && !installed && !dismissed && !isStandalone) {
         console.log('Showing fallback install prompt');
         this.showInstall = true;
       }

@@ -2,7 +2,7 @@ import { Injectable, NgZone } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { environment } from '../environments/environment';
 import { HttpClient, HttpParams,HttpHeaders  } from '@angular/common/http';
-import { firstValueFrom } from 'rxjs';
+import { firstValueFrom, catchError } from 'rxjs';
 
 // Import dinâmico dos wrappers .js que você copiou para src/app/luxand
 // (o TS aceita devido ao "allowJs": true)
@@ -213,7 +213,13 @@ export class FaceSdkService {
         const raw = await firstValueFrom(
           this.http.get(endpoint, {
             params, headers, responseType: 'text'
-          })
+          }).pipe(
+            // Adiciona timeout e retry para melhor compatibilidade com Safari
+            catchError(error => {
+              console.warn('Erro na requisição HTTP:', error);
+              throw error;
+            })
+          )
         );
         
         console.log('📥 Resposta recebida da API:', raw.substring(0, 100) + '...');

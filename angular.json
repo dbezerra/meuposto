@@ -23,6 +23,7 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
+              "src/manifest.webmanifest",
               {
                 "glob": "**/*",
                 "input": "public"
@@ -31,7 +32,8 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "serviceWorker": "ngsw-config.json"
           },
           "configurations": {
             "production": {

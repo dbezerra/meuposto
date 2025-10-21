@@ -1,0 +1,33 @@
+{
+  "$schema": "https://angular.dev/assets/schema/service-worker-config.json",
+  "index": "/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "resources": {
+        "files": [
+          "/favicon.ico",
+          "/index.html",
+          "/*.css",
+          "/*.js"
+        ]
+      }
+    },
+    {
+      "name": "assets",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "resources": {
+        "files": [
+          "/assets/**",
+          "/manifest.webmanifest"
+        ]
+      }
+    }
+  ],
+  "dataGroups": []
+}
+
+

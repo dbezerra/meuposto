@@ -7,12 +7,124 @@
   height: 100%;
 }
 
-/* Tablet responsive adjustments */
-@media (max-width: 1024px) {
+/* iPad Pro and large tablets */
+@media (max-width: 1366px) and (min-width: 1025px) {
+  .container {
+    padding: 20px;
+    gap: 20px;
+    grid-template-columns: 1fr 380px;
+  }
+}
+
+/* iPad and medium tablets */
+@media (max-width: 1024px) and (min-width: 769px) {
   .container {
     padding: 16px;
     gap: 16px;
-    grid-template-columns: 1fr 350px;
+    grid-template-columns: 1fr 320px;
+  }
+  
+  .header-time {
+    padding: 16px;
+  }
+  
+  .header-time .time {
+    font-size: 2.5rem;
+  }
+  
+  .header-time .day-of-week {
+    font-size: 0.9rem;
+  }
+  
+  .header-time .full-date {
+    font-size: 0.8rem;
+  }
+  
+  .main {
+    padding: 16px;
+  }
+  
+  .main .action {
+    padding: 20px;
+  }
+  
+  .main .action h3 {
+    font-size: 1.1rem;
+  }
+  
+  .main .action p {
+    font-size: 0.9rem;
+  }
+  
+  .sidebar-wrapper {
+    gap: 12px;
+  }
+  
+  .logo-card {
+    padding: 16px;
+  }
+  
+  .logo-img-sidebar {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .side h3 {
+    font-size: 1rem;
+  }
+  
+  .side .item {
+    padding: 12px;
+  }
+  
+  .side .item .time {
+    font-size: 0.8rem;
+  }
+  
+  .side .item .name {
+    font-size: 0.9rem;
+  }
+}
+
+/* iPad Portrait */
+@media (max-width: 1024px) and (min-width: 769px) and (orientation: portrait) {
+  .container {
+    padding: 12px;
+    gap: 12px;
+    grid-template-columns: 1fr 280px;
+  }
+  
+  .header-time .time {
+    font-size: 2.2rem;
+  }
+  
+  .main .action {
+    padding: 16px;
+  }
+  
+  .main .action h3 {
+    font-size: 1rem;
+  }
+  
+  .main .action p {
+    font-size: 0.85rem;
+  }
+}
+
+/* iPad Landscape */
+@media (max-width: 1366px) and (min-width: 1025px) and (orientation: landscape) {
+  .container {
+    padding: 18px;
+    gap: 18px;
+    grid-template-columns: 1fr 360px;
+  }
+  
+  .header-time .time {
+    font-size: 2.8rem;
+  }
+  
+  .main .action {
+    padding: 22px;
   }
 }
 

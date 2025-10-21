@@ -7,37 +7,169 @@
   box-sizing: border-box;
 }
 
-/* Tablet responsive adjustments */
-@media (max-width: 1024px) {
+/* iPad Pro and large tablets */
+@media (max-width: 1366px) and (min-width: 1025px) {
   .shell {
-    padding: 16px;
-    grid-template-columns: 1fr 350px;
-    column-gap: 16px;
+    padding: 20px;
+    grid-template-columns: 1fr 380px;
+    column-gap: 20px;
   }
 }
 
-@media (max-width: 768px) {
+/* iPad and medium tablets */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .shell {
+    padding: 16px;
+    grid-template-columns: 1fr 320px;
+    column-gap: 16px;
+  }
+  
+  .header-time {
+    padding: 16px;
+  }
+  
+  .header-time .time {
+    font-size: 2.5rem;
+  }
+  
+  .header-time .day-of-week {
+    font-size: 0.9rem;
+  }
+  
+  .header-time .full-date {
+    font-size: 0.8rem;
+  }
+  
+  .preview {
+    padding: 16px;
+    min-height: 50vh;
+  }
+  
+  .preview video {
+    min-height: 300px;
+  }
+  
+  .preview canvas {
+    top: 16px;
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+    width: calc(100% - 32px);
+    height: calc(100% - 32px);
+  }
+  
+  .caption {
+    padding: 12px 16px;
+  }
+  
+  .caption .action-icon {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .caption span {
+    font-size: 0.9rem;
+  }
+  
+  .logo-card {
+    padding: 16px;
+  }
+  
+  .logo-img-sidebar {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .manual {
+    padding: 16px;
+  }
+  
+  .manual h3 {
+    font-size: 1rem;
+  }
+  
+  .manual p {
+    font-size: 0.9rem;
+  }
+  
+  .input-box {
+    padding: 12px;
+    font-size: 1rem;
+  }
+  
+  .keypad {
+    gap: 8px;
+  }
+  
+  .key {
+    padding: 12px;
+    font-size: 1rem;
+  }
+  
+  .help {
+    margin-top: 12px;
+  }
+  
+  .btn-help {
+    padding: 10px 16px;
+    font-size: 0.9rem;
+  }
+}
+
+/* iPad Portrait */
+@media (max-width: 1024px) and (min-width: 769px) and (orientation: portrait) {
   .shell {
     padding: 12px;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto;
-    row-gap: 12px;
+    grid-template-columns: 1fr 280px;
+    column-gap: 12px;
+  }
+  
+  .header-time .time {
+    font-size: 2.2rem;
+  }
+  
+  .preview {
+    padding: 12px;
+    min-height: 45vh;
+  }
+  
+  .preview video {
+    min-height: 280px;
+  }
+  
+  .manual {
+    padding: 12px;
+  }
+  
+  .keypad {
+    gap: 6px;
+  }
+  
+  .key {
+    padding: 10px;
+    font-size: 0.95rem;
   }
 }
 
-@media (max-width: 480px) {
+/* iPad Landscape */
+@media (max-width: 1366px) and (min-width: 1025px) and (orientation: landscape) {
   .shell {
-    padding: 8px;
-    row-gap: 8px;
+    padding: 18px;
+    grid-template-columns: 1fr 360px;
+    column-gap: 18px;
   }
-}
-
-/* Tablet responsive adjustments */
-@media (max-width: 1024px) {
-  .shell {
-    padding: 16px;
-    grid-template-columns: 1fr 350px;
-    column-gap: 16px;
+  
+  .header-time .time {
+    font-size: 2.8rem;
+  }
+  
+  .preview {
+    padding: 18px;
+    min-height: 55vh;
+  }
+  
+  .preview video {
+    min-height: 320px;
   }
 }
 

@@ -1,4 +1,7 @@
 {
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist/luxand-angular/browser",
+  "installCommand": "npm install --legacy-peer-deps",
   "rewrites": [
     {
       "source": "/api/(.*)",
@@ -16,6 +19,24 @@
         {
           "key": "Content-Type",
           "value": "application/wasm"
+        }
+      ]
+    },
+    {
+      "source": "/ngsw-worker.js",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache"
+        }
+      ]
+    },
+    {
+      "source": "/ngsw.json",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache"
         }
       ]
     }

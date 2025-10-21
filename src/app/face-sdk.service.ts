@@ -188,15 +188,21 @@ export class FaceSdkService {
 
       this.seeding = true;
       try {
-        console.log('📡 Fazendo chamada para API do Portal Prestador via proxy Angular...');
+        console.log('📡 Fazendo chamada para API do Portal Prestador (auto-env)...');
 
         // const results = resp?.results ?? [];
         const params = new HttpParams().set('filial', filial);
         const headers = this.authHeaders();
 
+        // Choose endpoint based on runtime environment:
+        // - Dev (ng serve): use Angular proxy at /rest
+        // - Prod (Vercel/HTTPS): use serverless function at /api
+        const isHttps = typeof location !== 'undefined' && location.protocol === 'https:';
+        const endpoint = isHttps ? '/api/portalprestador/fotofunc' : '/rest/PORTALPRESTADOR/fotofunc';
+
         // *** pega como TEXTO ***
         const raw = await firstValueFrom(
-          this.http.get('/rest/PORTALPRESTADOR/fotofunc', {
+          this.http.get(endpoint, {
             params, headers, responseType: 'text'
           })
         );

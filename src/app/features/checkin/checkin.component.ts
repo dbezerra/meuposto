@@ -145,7 +145,12 @@ export class CheckinComponent implements AfterViewInit, OnDestroy {
       let registrado = false;
       this.sub = this.sdk.lastInfo$.subscribe(info => {
         if (!registrado && info.detected && info.liveness >= 0.6 && info.name && info.name !== 'Desconhecido') {
-          this.times.registrar(this.tipo, info.name, new Date());
+          // captura thumbnail da pessoa a partir do canvas atual
+          let fotoDataUrl: string | undefined;
+          try {
+            fotoDataUrl = this.canvasEl?.nativeElement?.toDataURL('image/jpeg', 0.8);
+          } catch {}
+          this.times.registrar(this.tipo, info.name, new Date(), fotoDataUrl);
           this.statusMsg = `${this.label(this.tipo)} registrado para ${info.name}`;
           this.ok = true;
           registrado = true;

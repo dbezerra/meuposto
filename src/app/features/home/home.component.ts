@@ -15,6 +15,7 @@ import { FaceSdkService } from '../../face-sdk.service';
 export class HomeComponent {
   agora = new Date();
   dia!: { entrada?: string; pausa?: string; retorno?: string; saida?: string; nome?: string };
+  ultimas: { nome: string; tipo: 'entrada'|'pausa'|'retorno'|'saida'; quandoISO: string; fotoDataUrl?: string }[] = [];
 
   constructor(private times: TimesService,private sdk: FaceSdkService) {
     this.dia = this.times.getHoje();               
@@ -24,6 +25,9 @@ export class HomeComponent {
     this.sdk.stopCamera();
     // 1x no início: baixa fotos e cadastra
     this.sdk.seedPortalOnce('D MG 01');
+
+    // carrega últimas marcações
+    this.ultimas = this.times.getUltimas(5);
   }
 
   get dataFormatada() {
@@ -32,5 +36,15 @@ export class HomeComponent {
 
   atualizar() {
     this.dia = this.times.getHoje();
+    this.ultimas = this.times.getUltimas(5);
+  }
+
+  label(tipo: 'entrada'|'pausa'|'retorno'|'saida') {
+    switch (tipo) {
+      case 'entrada': return 'Entrada';
+      case 'pausa': return 'Pausa';
+      case 'retorno': return 'Retorno';
+      case 'saida': return 'Saída';
+    }
   }
 }

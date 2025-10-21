@@ -64,40 +64,12 @@
       <aside class="card side">
         <h3>Últimas marcações</h3>
         <div class="list">
-          <div class="item">
+          <div class="item" *ngFor="let u of ultimas">
             <div class="user">
-              <img src="https://i.pravatar.cc/40?u=1" alt="Avatar" class="avatar-img">
-              <div class="name">Julia Cristina Cameira</div>
+              <img [src]="u.fotoDataUrl || 'assets/img/totvs-logo.png'" alt="Avatar" class="avatar-img">
+              <div class="name">{{ u.nome }}</div>
             </div>
-            <span class="pill entrada">Entrada</span>
-          </div>
-          <div class="item">
-            <div class="user">
-              <img src="https://i.pravatar.cc/40?u=2" alt="Avatar" class="avatar-img">
-              <div class="name">Marco Antonio Silva</div>
-            </div>
-            <span class="pill pausa">Pausa</span>
-          </div>
-          <div class="item">
-            <div class="user">
-              <img src="https://i.pravatar.cc/40?u=3" alt="Avatar" class="avatar-img">
-              <div class="name">Ana Paula Gomes</div>
-            </div>
-            <span class="pill saida">Saída</span>
-          </div>
-          <div class="item">
-            <div class="user">
-              <img src="https://i.pravatar.cc/40?u=4" alt="Avatar" class="avatar-img">
-              <div class="name">Ricardo Alves</div>
-            </div>
-            <span class="pill entrada">Entrada</span>
-          </div>
-          <div class="item">
-            <div class="user">
-              <img src="https://i.pravatar.cc/40?u=5" alt="Avatar" class="avatar-img">
-              <div class="name">Doralice Motta</div>
-            </div>
-            <span class="pill retorno">Retorno</span>
+            <span class="pill" [ngClass]="u.tipo">{{ label(u.tipo) }}</span>
           </div>
         </div>
       </aside>

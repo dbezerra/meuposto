@@ -1,0 +1,231 @@
+/* ===== Tokens ===== */
+:root {
+  --bg: #f4f2f7;
+  --surface: #ffffff;
+  --border: #e5e5e5;
+  --text: #20262e;
+  --muted: #666666;
+  --accent: #4a5c60;
+
+  --entrada: #e6f6ef;
+  --pausa: #fbf3d8;
+  --retorno: #e4e9fb;
+  --saida: #f9eaeb;
+
+  --radius: 8px;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* ===== Base ===== */
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+body {
+  font-family: "Nunito Sans", system-ui, Arial, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center; /* centro */
+}
+
+/* canvas tablet fixo */
+.app-wrapper {
+  width: 1280px;
+  height: 800px;
+}
+
+/* layout de duas colunas independentes */
+.shell {
+  height: 100%;
+  padding: 24px; /* 24px de borda em toda a tela */
+  display: grid;
+  grid-template-columns: 687px 457.5px; /* L e R com medidas do layout */
+  gap: 24px; /* espaço entre colunas */
+}
+
+/* colunas com gaps independentes */
+.col {
+  display: flex;
+  flex-direction: column;
+}
+.col-left {
+  gap: 24px;
+} /* ESQUERDA: 24px entre topo e preview */
+.col-right {
+  gap: 8px;
+} /* DIREITA: 8px entre logo, manual e ajuda */
+
+/* cards padrão */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---------- topo hora/data ---------- */
+.header-time {
+  padding: 16px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 24.13px;
+}
+.time {
+  font-weight: 200;
+  font-size: 75.39px;
+  line-height: 96.5px;
+  color: var(--accent);
+}
+.date-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+.day-of-week,
+.full-date {
+  font-weight: 700;
+  font-size: 24.13px;
+  line-height: 36.19px;
+  color: var(--accent);
+}
+
+/* ---------- logo ---------- */
+.logo-card {
+  /* para caber exatamente o conteúdo 454×85 */
+  padding: 16px 0;
+  align-items: center;
+  justify-content: center;
+}
+.logo-img-sidebar {
+  width: 454px; /* largura exata */
+  height: 85px; /* altura exata */
+  display: block;
+  object-fit: contain;
+}
+
+/* ---------- preview (área da imagem + status) ---------- */
+.preview {
+  padding: 24px;
+  gap: 24px;
+}
+.video-mock {
+  width: 632px;
+  height: 474px;
+  background: #efefef;
+  border-radius: 4px;
+  margin: 0 auto;
+}
+.caption {
+  width: 633px;
+  height: 58px;
+  border-radius: 8px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-weight: 700;
+  font-size: 26.51px;
+  line-height: 39.77px;
+  color: var(--accent);
+}
+.caption--entrada {
+  background: var(--entrada);
+}
+.caption--pausa {
+  background: var(--pausa);
+}
+.caption--retorno {
+  background: var(--retorno);
+}
+.caption--saida {
+  background: var(--saida);
+}
+.action-icon {
+  stroke: currentColor;
+}
+
+/* ---------- apontamento manual ---------- */
+.manual {
+  padding: 16px;
+  gap: 10px;
+  height: 518.34px; /* altura do layout */
+}
+.manual h3 {
+  margin: 0;
+  font-weight: 600;
+  font-size: 34px;
+  line-height: 48px;
+  color: #000;
+}
+.manual p {
+  margin: 0;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 32px;
+  color: var(--muted);
+}
+.input-box {
+  height: 64px;
+  width: 100%;
+  background: #f0f0f0;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  font-size: 24px;
+  font-weight: 600;
+}
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.key {
+  height: 70px;
+  border: 1px solid var(--border);
+  background: #f8f8f8;
+  border-radius: 8px;
+  font-size: 24px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.key:hover {
+  background: #eaeaea;
+}
+.key--erase {
+  grid-column: 2 / 4;
+}
+
+/* ---------- ajuda (fora do card) ---------- */
+.help {
+  display: flex;
+}
+.btn-help {
+  width: 457px;
+  height: 56px;
+  min-height: 56px;
+  border-radius: 8px;
+  background: #f0f8ff;
+  border: 1.5px solid #045b8f;
+  color: #045b8f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1;
+  text-decoration: none;
+}
+.btn-help:hover {
+  background: #e0f0ff;
+}

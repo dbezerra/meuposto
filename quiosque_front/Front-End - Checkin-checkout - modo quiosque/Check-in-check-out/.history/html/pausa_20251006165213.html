@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8" />
+    <title>Pausa — Apontamento</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,200;6..12,400;6..12,600;6..12,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+    <div class="app-wrapper">
+        <section class="shell">
+            
+            <div class="card header-time">
+                <div class="time">15:05</div>
+                <div class="date-wrapper">
+                    <span class="day-of-week">SEGUNDA-FEIRA</span>
+                    <span class="full-date">06 DE OUTUBRO DE 2025</span>
+                </div>
+            </div>
+
+            <div class="card logo-card">
+                 <img src="../img/totvs-logo.png" alt="TOTVS" class="logo-img-sidebar" />
+            </div>
+
+            <div class="card preview">
+                <div class="video-mock"></div>
+                <div class="caption caption--Pausa">
+                    <svg class="action-icon" style="width: 14.91px; height: 26.1px; stroke-width: 3;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg>
+                    <span>Pausa</span>
+                </div>
+            </div>
+
+            <div class="card manual">
+                <h3>Apontamento manual</h3>
+                <p>Digite seu CPF</p>
+                <div class="input-box"><span id="cpf-text"></span></div>
+                <div class="keypad">
+                    <button class="key" data-key="1">1</button>
+                    <button class="key" data-key="2">2</button>
+                    <button class="key" data-key="3">3</button>
+                    <button class="key" data-key="4">4</button>
+                    <button class="key" data-key="5">5</button>
+                    <button class="key" data-key="6">6</button>
+                    <button class="key" data-key="7">7</button>
+                    <button class="key" data-key="8">8</button>
+                    <button class="key" data-key="9">9</button>
+                    <button class="key" data-key="0">0</button>
+                    <button class="key key--erase" data-key="erase">Apagar</button>
+                </div>
+                <div class="spacer"></div>
+                <div class="help">
+                    <a href="#" class="btn-help">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                        Ajuda
+                    </a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+      (function () {
+        const cpfText = document.getElementById("cpf-text");
+        const keypad = document.querySelector(".keypad");
+        if(!cpfText || !keypad) return;
+        let digits = "";
+        function formatCPF(nums) {
+          const s = nums.replace(/\D/g, "").slice(0, 11);
+          if (s.length <= 3) return s;
+          if (s.length <= 6) return s.slice(0, 3) + "." + s.slice(3);
+          if (s.length <= 9) return s.slice(0, 3) + "." + s.slice(3, 6) + "." + s.slice(6);
+          return (s.slice(0, 3)+"."+s.slice(3, 6)+"."+s.slice(6, 9)+"-"+s.slice(9));
+        }
+        function render() { cpfText.textContent = formatCPF(digits); }
+        keypad.addEventListener("click", function (e) {
+          const key = e.target.dataset.key;
+          if (key === "erase") { digits = digits.slice(0, -1);
+          } else if (/^\d$/.test(key)) { if (digits.length < 11) digits += key; }
+          render();
+        });
+        render();
+      })();
+    </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8" />
+    <title>Pausa — Apontamento</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,200;6..12,400;6..12,600;6..12,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+    <div class="app-wrapper">
+        <section class="shell">
+            
+            <div class="card header-time">
+                <div class="time">15:05</div>
+                <div class="date-wrapper">
+                    <span class="day-of-week">SEGUNDA-FEIRA</span>
+                    <span class="full-date">06 DE OUTUBRO DE 2025</span>
+                </div>
+            </div>
+
+            <div class="card logo-card">
+                 <img src="../img/totvs-logo.png" alt="TOTVS" class="logo-img-sidebar" />
+            </div>
+
+            <div class="card preview">
+                <div class="video-mock"></div>
+                <div class="caption caption--Pausa">
+                    <svg class="action-icon" style="width: 14.91px; height: 26.1px; stroke-width: 3;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg>
+                    <span>Pausa</span>
+                </div>
+            </div>
+
+            <div class="card manual">
+                <h3>Apontamento manual</h3>
+                <p>Digite seu CPF</p>
+                <div class="input-box"><span id="cpf-text"></span></div>
+                <div class="keypad">
+                    <button class="key" data-key="1">1</button>
+                    <button class="key" data-key="2">2</button>
+                    <button class="key" data-key="3">3</button>
+                    <button class="key" data-key="4">4</button>
+                    <button class="key" data-key="5">5</button>
+                    <button class="key" data-key="6">6</button>
+                    <button class="key" data-key="7">7</button>
+                    <button class="key" data-key="8">8</button>
+                    <button class="key" data-key="9">9</button>
+                    <button class="key" data-key="0">0</button>
+                    <button class="key key--erase" data-key="erase">Apagar</button>
+                </div>
+                <div class="spacer"></div>
+                <div class="help">
+                    <a href="#" class="btn-help">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                        Ajuda
+                    </a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+      (function () {
+        const cpfText = document.getElementById("cpf-text");
+        const keypad = document.querySelector(".keypad");
+        if(!cpfText || !keypad) return;
+        let digits = "";
+        function formatCPF(nums) {
+          const s = nums.replace(/\D/g, "").slice(0, 11);
+          if (s.length <= 3) return s;
+          if (s.length <= 6) return s.slice(0, 3) + "." + s.slice(3);
+          if (s.length <= 9) return s.slice(0, 3) + "." + s.slice(3, 6) + "." + s.slice(6);
+          return (s.slice(0, 3)+"."+s.slice(3, 6)+"."+s.slice(6, 9)+"-"+s.slice(9));
+        }
+        function render() { cpfText.textContent = formatCPF(digits); }
+        keypad.addEventListener("click", function (e) {
+          const key = e.target.dataset.key;
+          if (key === "erase") { digits = digits.slice(0, -1);
+          } else if (/^\d$/.test(key)) { if (digits.length < 11) digits += key; }
+          render();
+        });
+        render();
+      })();
+    </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8" />
+    <title>Pausa — Apontamento</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,200;6..12,400;6..12,600;6..12,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+    <div class="app-wrapper">
+        <section class="shell">
+            
+            <div class="card header-time">
+                <div class="time">15:05</div>
+                <div class="date-wrapper">
+                    <span class="day-of-week">SEGUNDA-FEIRA</span>
+                    <span class="full-date">06 DE OUTUBRO DE 2025</span>
+                </div>
+            </div>
+
+            <div class="card logo-card">
+                 <img src="../img/totvs-logo.png" alt="TOTVS" class="logo-img-sidebar" />
+            </div>
+
+            <div class="card preview">
+                <div class="video-mock"></div>
+                <div class="caption caption--Pausa">
+                    <svg class="action-icon" style="width: 14.91px; height: 26.1px; stroke-width: 3;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg>
+                    <span>Pausa</span>
+                </div>
+            </div>
+
+            <div class="card manual">
+                <h3>Apontamento manual</h3>
+                <p>Digite seu CPF</p>
+                <div class="input-box"><span id="cpf-text"></span></div>
+                <div class="keypad">
+                    <button class="key" data-key="1">1</button>
+                    <button class="key" data-key="2">2</button>
+                    <button class="key" data-key="3">3</button>
+                    <button class="key" data-key="4">4</button>
+                    <button class="key" data-key="5">5</button>
+                    <button class="key" data-key="6">6</button>
+                    <button class="key" data-key="7">7</button>
+                    <button class="key" data-key="8">8</button>
+                    <button class="key" data-key="9">9</button>
+                    <button class="key" data-key="0">0</button>
+                    <button class="key key--erase" data-key="erase">Apagar</button>
+                </div>
+                <div class="spacer"></div>
+                <div class="help">
+                    <a href="#" class="btn-help">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                        Ajuda
+                    </a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+      (function () {
+        const cpfText = document.getElementById("cpf-text");
+        const keypad = document.querySelector(".keypad");
+        if(!cpfText || !keypad) return;
+        let digits = "";
+        function formatCPF(nums) {
+          const s = nums.replace(/\D/g, "").slice(0, 11);
+          if (s.length <= 3) return s;
+          if (s.length <= 6) return s.slice(0, 3) + "." + s.slice(3);
+          if (s.length <= 9) return s.slice(0, 3) + "." + s.slice(3, 6) + "." + s.slice(6);
+          return (s.slice(0, 3)+"."+s.slice(3, 6)+"."+s.slice(6, 9)+"-"+s.slice(9));
+        }
+        function render() { cpfText.textContent = formatCPF(digits); }
+        keypad.addEventListener("click", function (e) {
+          const key = e.target.dataset.key;
+          if (key === "erase") { digits = digits.slice(0, -1);
+          } else if (/^\d$/.test(key)) { if (digits.length < 11) digits += key; }
+          render();
+        });
+        render();
+      })();
+    </script>
+</body>
+</html>

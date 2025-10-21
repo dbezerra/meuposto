@@ -1,0 +1,236 @@
+/* =========================
+   Tokens
+   ========================= */
+:root{
+  --bg:#f4f2f7;
+  --surface:#ffffff;
+  --border:#E5E5E5;
+  --text:#20262E;
+  --muted:#666666;
+  --accent:#4A5C60;
+
+  /* fundos por status */
+  --entrada:#E6F6EF;   /* verde 100 */
+  --pausa:#FBF3D8;     /* amber 100 */
+  --retorno:#E4E9FB;   /* blue 100 */
+  --saida:#F9EAEB;     /* red 100 */
+
+  --radius:8px;
+  --shadow:0 4px 12px rgba(0,0,0,.05);
+}
+
+/* =========================
+   Base
+   ========================= */
+*{ box-sizing:border-box; }
+html, body{ height:100%; margin:0; }
+body{
+  font-family:"Nunito Sans",system-ui,Arial,sans-serif;
+  color:var(--text);
+  background:var(--bg);
+}
+
+/* canvas em tela cheia com 24px de respiro ao redor */
+.app-wrapper{
+  width:100vw;
+  height:100vh;
+  background:var(--bg);
+  overflow:hidden;
+}
+
+/* =========================
+   Grid principal (tablet 1280x800)
+   24px de padding em toda a volta
+   Linhas: 150 (topo) / 522 (conteúdo) / 56 (Ajuda)
+   ========================= */
+.shell{
+  height:100%;
+  padding:24px;
+  display:grid;
+  grid-template-columns: 687px 457.5px;
+  grid-template-rows: 150px 522px 56px;
+  column-gap:24px;
+  row-gap:12px;
+}
+
+/* =========================
+   Card base
+   ========================= */
+.card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+}
+
+/* áreas da grid */
+.header-time{ grid-area:1 / 1 / 2 / 2; }
+.logo-card  { grid-area:1 / 2 / 2 / 3; }
+.preview    { grid-area:2 / 1 / 3 / 2; }
+.manual     { grid-area:2 / 2 / 3 / 3; }
+.help       { grid-area:3 / 2 / 4 / 3; }
+
+/* =========================
+   Topo: Hora e Data (687 x 150)
+   ========================= */
+.header-time{
+  padding:16px;
+  flex-direction:row;
+  align-items:center;
+  justify-content:center;
+  gap:24.13px;
+}
+.time{
+  font-weight:200;           /* ExtraLight */
+  font-size:75.39px;
+  line-height:96.5px;
+  color:var(--accent);
+}
+.date-wrapper{ display:flex; flex-direction:column; }
+.day-of-week,
+.full-date{
+  font-weight:700;
+  font-size:24.13px;
+  line-height:36.19px;
+  color:var(--accent);
+}
+
+/* =========================
+   Logo (card do topo direito)
+   ========================= */
+.logo-card{
+  padding:16px;
+  align-items:center;
+  justify-content:center;
+}
+.logo-img-sidebar{
+  width:454px;
+  height:85px;
+  max-width:100%;
+  object-fit:contain;
+}
+
+/* =========================
+   Preview (687 x 522)
+   ========================= */
+.preview{
+  padding:24px;
+  gap:24px;
+}
+
+/* área cinza onde ficaria a câmera (632 x 474) */
+.video-mock{
+  width:632px;
+  height:474px;
+  background:#EFEFEF;
+  border-radius:4px;
+  margin:0 auto; /* centralizada */
+}
+
+/* barra de status (633 x 58) */
+.caption{
+  width:633px;
+  height:58px;
+  border-radius:8px;
+  margin:0 auto;              /* centralizada */
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  font-weight:700;
+  font-size:26.51px;
+  line-height:39.77px;
+  color:var(--accent);
+}
+.caption--entrada{ background:var(--entrada); }
+.caption--pausa  { background:var(--pausa); }
+.caption--retorno{ background:var(--retorno); }
+.caption--saida  { background:var(--saida); }
+.action-icon{ stroke:currentColor; }
+
+/* =========================
+   Apontamento manual (457.5 x 518.34)
+   ========================= */
+.manual{
+  padding:16px;
+  gap:10px;
+}
+.manual h3{
+  margin:0;
+  font-weight:600;
+  font-size:34px;
+  line-height:48px;
+  color:#000;
+}
+.manual p{
+  margin:0;
+  font-weight:400;
+  font-size:24px;
+  line-height:32px;
+  color:var(--muted);
+}
+
+/* campo do CPF */
+.input-box{
+  height:64px;
+  width:100%;
+  background:#F0F0F0;
+  border-radius:8px;
+  display:flex;
+  align-items:center;
+  padding:0 16px;
+  font-size:24px;
+  font-weight:600;
+}
+
+/* teclado numérico */
+.keypad{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:12px;
+}
+.key{
+  height:70px;
+  border:1px solid var(--border);
+  background:#F8F8F8;
+  border-radius:8px;
+  font-size:24px;
+  font-weight:600;
+  cursor:pointer;
+}
+.key:hover{ background:#EAEAEA; }
+.key--erase{ grid-column:2 / 4; }
+
+/* =========================
+   Botão Ajuda (fora do card)
+   ========================= */
+.help{
+  display:flex;
+  align-items:center;
+}
+.btn-help{
+  width:457px;
+  height:56px;
+  min-height:56px;
+  border-radius:8px;
+  background:#F0F8FF;
+  border:1.5px solid #045B8F;
+  color:#045B8F;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  font-weight:700;
+  font-size:16px;
+  line-height:1;
+  text-decoration:none;
+}
+.btn-help:hover{ background:#E0F0FF; }
+
+/* segurança adicional caso a viewport seja um pouco menor */
+@media (max-height:800px){
+  .shell{ overflow:auto; }
+}

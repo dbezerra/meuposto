@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <title>Entrada — CPF</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body>
+    <div class="app-wrapper">
+      <section class="shell">
+        <div class="card header-time">
+          <div class="time">13:23</div>
+          <div class="date">SEGUNDA-FEIRA • 28 DE JULHO DE 2025</div>
+        </div>
+        <div class="card header-logo">
+          <img src="../img/totvs-logo.png" alt="TOTVS" class="logo-img" />
+        </div>
+
+        <div class="card preview">
+          <div class="video-mock"></div>
+          <div class="caption">Entrada</div>
+        </div>
+
+        <div class="card manual">
+          <h3>Apontamento manual</h3>
+          <p>Digite seu CPF</p>
+
+          <div
+            class="input-box"
+            id="cpf-visor"
+            aria-label="Visor do CPF"
+            role="textbox"
+            tabindex="0"
+          >
+            <span
+              id="cpf-text"
+              style="font-size: 20px; padding-left: 12px; color: var(--text)"
+            ></span>
+          </div>
+
+          <div class="keypad" id="cpf-keypad" aria-hidden="false">
+            <button class="key" data-key="1" type="button">1</button>
+            <button class="key" data-key="2" type="button">2</button>
+            <button class="key" data-key="3" type="button">3</button>
+
+            <button class="key" data-key="4" type="button">4</button>
+            <button class="key" data-key="5" type="button">5</button>
+            <button class="key" data-key="6" type="button">6</button>
+
+            <button class="key" data-key="7" type="button">7</button>
+            <button class="key" data-key="8" type="button">8</button>
+            <button class="key" data-key="9" type="button">9</button>
+
+            <button class="key" data-key="0" type="button">0</button>
+            <button class="key key--erase" data-key="erase" type="button">
+              Apagar
+            </button>
+          </div>
+
+          <div class="spacer"></div>
+          <div class="help"><a class="btn-help" href="#">ⓘ Ajuda</a></div>
+        </div>
+    </section>
+</div>
+<button class="help" href="#">ⓘ Ajuda</button>
+
+    <script>
+      (function () {
+        const MAX_DIGITS = 11; // CPF sem pontos/hífen
+        const visor = document.getElementById("cpf-visor");
+        const cpfText = document.getElementById("cpf-text");
+        const keypad = document.getElementById("cpf-keypad");
+
+        let digits = ""; // apenas números
+
+        function formatCPF(nums) {
+          // formata 000.000.000-00 enquanto digita
+          const s = nums.replace(/\D/g, "").slice(0, 11);
+          if (s.length <= 3) return s;
+          if (s.length <= 6) return s.slice(0, 3) + "." + s.slice(3);
+          if (s.length <= 9)
+            return s.slice(0, 3) + "." + s.slice(3, 6) + "." + s.slice(6);
+          return (
+            s.slice(0, 3) +
+            "." +
+            s.slice(3, 6) +
+            "." +
+            s.slice(6, 9) +
+            "-" +
+            s.slice(9)
+          );
+        }
+
+        function render() {
+          cpfText.textContent = formatCPF(digits);
+          // opção: adicionar classe "empty" quando vazio
+          if (!digits) visor.classList.add("empty");
+          else visor.classList.remove("empty");
+        }
+
+        // clique em teclas (event delegation)
+        keypad.addEventListener("click", function (e) {
+          const btn = e.target.closest("button[data-key]");
+          if (!btn) return;
+          const key = btn.getAttribute("data-key");
+
+          if (key === "erase") {
+            digits = digits.slice(0, -1);
+          } else if (/^\d$/.test(key)) {
+            if (digits.length < MAX_DIGITS) digits += key;
+          }
+          render();
+        });
+
+        // suporte teclado físico (opcional)
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "Backspace") {
+            digits = digits.slice(0, -1);
+            render();
+            return;
+          }
+          if (/^\d$/.test(e.key)) {
+            if (digits.length < MAX_DIGITS) digits += e.key;
+            render();
+          }
+        });
+
+        // inicializa
+        render();
+      })();
+    </script>
+  </body>
+</html>

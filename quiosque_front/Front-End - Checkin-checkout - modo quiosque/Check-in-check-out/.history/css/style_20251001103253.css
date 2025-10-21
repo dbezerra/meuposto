@@ -1,0 +1,156 @@
+/* ---------- Tokens (tema claro) ---------- */
+:root{
+  --bg:#eef2f6;
+  --surface:#fff;
+  --border:#e5e7eb;
+  --text:#20262e;
+  --muted:#6b7280;
+  --brand:#0b2638;
+
+  --green:#1aa56b;   --green-100:#e6f6ef;
+  --amber:#d6a300;   --amber-100:#fbf3d8;
+  --blue:#3155c9;    --blue-100:#e4e9fb;
+  --red:#d6455d;     --red-100:#f9e6ea;
+
+  --radius:12px;
+  --shadow:0 6px 22px rgba(16,24,40,.06);
+
+  /* nova escala de espaçamento */
+  --pad:20px;   /* padding externo da página */
+  --gap:18px;   /* espaço entre cards */
+}
+
+/* ---------- Base ---------- */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font:16px/1.45 Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color:var(--text);
+  background:var(--bg);
+}
+
+/* wrapper responsivo (preenche a tela, sem bordas grandes) */
+.app-wrapper{
+  max-width:1440px;             /* limita em desktop largo */
+  margin:0 auto;
+  min-height:100vh;
+  padding:var(--pad);           /* respiro uniforme em TODAS as bordas */
+}
+
+/* ---------- GRID DA HOME ---------- */
+.container{
+  display:grid;
+  grid-template-columns: 1fr 340px;   /* conteúdo | últimas marcações */
+  grid-auto-rows:max-content;
+  gap:var(--gap);
+}
+
+/* Header cards */
+.card{background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow)}
+.header-time{grid-column:1/2; padding:24px}
+.header-time .time{font-size:52px; font-weight:700; line-height:1}
+.header-time .date{color:var(--muted); margin-top:8px; font-weight:600}
+.header-logo{grid-column:2/3; display:flex; align-items:center; justify-content:center; padding:18px}
+.logo-img{max-width:170px; max-height:56px; object-fit:contain; filter:none}
+
+/* Corpo principal */
+.main{grid-column:1/2; padding:18px}
+.main h2{margin:0 0 6px}
+.hint{color:var(--muted); margin:0 0 14px}
+
+/* 4 ações */
+.actions{display:grid; grid-template-columns:repeat(2,1fr); gap:16px}
+.action{
+  display:block; text-decoration:none; color:inherit; background:var(--surface);
+  border:1px solid var(--border); border-radius:12px; padding:16px 16px 18px;
+  box-shadow:var(--shadow); transition:.15s ease; position:relative; min-height:124px;
+}
+.action:hover{transform:translateY(-2px)}
+.action .topbar{position:absolute; left:0; right:0; top:0; height:6px; border-radius:12px 12px 0 0}
+.action .num{font-size:32px; color:#8a96a6; font-weight:500; margin-top:6px}
+.action .label{display:flex; align-items:center; gap:10px; margin-top:16px; font-weight:700}
+.badge{display:inline-grid; place-items:center; width:32px; height:32px; border-radius:7px; font-size:18px}
+
+/* cores dos cards */
+.action--entrada .topbar{background:var(--green)}
+.action--entrada .badge{background:var(--green-100); color:var(--green)}
+.action--entrada{background:var(--green-100)}
+
+.action--pausa .topbar{background:var(--amber)}
+.action--pausa .badge{background:var(--amber-100); color:var(--amber)}
+.action--pausa{background:var(--amber-100)}
+
+.action--retorno .topbar{background:var(--blue)}
+.action--retorno .badge{background:var(--blue-100); color:var(--blue)}
+.action--retorno{background:var(--blue-100)}
+
+.action--saida .topbar{background:var(--red)}
+.action--saida .badge{background:var(--red-100); color:var(--red)}
+.action--saida{background:var(--red-100)}
+
+/* Sidebar últimas marcações */
+.side{grid-column:2/3; padding:16px}
+.side h3{margin:0 0 10px; font-size:16px; display:flex; align-items:center; gap:8px}
+.list{display:flex; flex-direction:column; gap:10px; max-height:calc(100% - 34px); overflow:auto; padding-right:4px}
+.item{
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:10px 12px
+}
+.user{display:flex; align-items:center; gap:10px; min-width:0}
+.avatar{width:28px; height:28px; border-radius:50%; background:#e5e7eb; display:grid; place-items:center; color:#525a67; font-size:12px}
+.name{white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+
+/* pílulas de status */
+.pill{font-size:12px; font-weight:700; padding:6px 10px; border-radius:999px; border:1px solid transparent}
+.pill.entrada{color:var(--green); background:var(--green-100); border-color:#cce9db}
+.pill.pausa{color:var(--amber); background:var(--amber-100); border-color:#f4e6b6}
+.pill.saida{color:var(--red); background:var(--red-100); border-color:#f4cdd5}
+.pill.retorno{color:var(--blue); background:var(--blue-100); border-color:#cdd6fb}
+
+/* ---------- Páginas de CPF (já existentes) ---------- */
+.grid-cpf{
+  display:grid;
+  grid-template-columns: 1fr 340px;
+  gap:var(--gap);
+  padding:0;                 /* usa o padding do wrapper */
+}
+.panel{background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow); padding:18px}
+.preview{padding:0}
+.video-mock{aspect-ratio:16/9; width:100%; background:#cfd6de; border-radius:10px 10px 0 0}
+.caption{display:flex; align-items:center; gap:10px; padding:12px 14px; border-top:4px solid var(--green); border-radius:0 0 10px 10px; background:#f3f8f5; font-weight:700; color:var(--green)}
+
+.manual h3{margin:6px 0 4px; font-size:20px}
+.manual p{margin:0 0 10px; color:var(--muted)}
+.input-box{height:54px; border:1px solid var(--border); background:#eceff3; border-radius:10px; margin-bottom:12px; padding:0 12px; font:600 18px/54px Inter, system-ui}
+.keypad{display:grid; grid-template-columns:repeat(3,1fr); gap:10px}
+.key{display:grid; place-items:center; height:58px; background:#f2f4f7; border:1px solid var(--border); border-radius:10px; font-weight:700; cursor:pointer}
+.key--erase{grid-column:2/4; background:#fff7f7; border-color:#f4cdd5; color:var(--red)}
+.key:active{transform:scale(.98)}
+
+.help{margin-top:14px; display:flex; justify-content:flex-end}
+.btn-help{display:inline-flex; align-items:center; gap:8px; padding:12px 18px; border:2px solid #3c91df; color:#0966bf; background:#e7f2ff; border-radius:10px; font-weight:700}
+
+/* ---------- RESPONSIVO ---------- */
+
+/* >= 1366 (desktop comum): coluna lateral um pouco maior */
+@media (min-width:1366px){
+  .container{grid-template-columns:1fr 360px}
+  .grid-cpf{grid-template-columns:1fr 360px}
+  .header-time .time{font-size:56px}
+}
+
+/* >= 1600 (desktop largo): mais respiro sem sobras desiguais */
+@media (min-width:1600px){
+  .app-wrapper{max-width:1560px}
+  :root{ --pad:24px; --gap:20px; }
+}
+
+/* <= 1100 (notebooks menores / responsivo) */
+@media (max-width:1100px){
+  .container{grid-template-columns:1fr}
+  .side{grid-column:auto}
+  .header-time,.header-logo{height:auto}
+  .actions{grid-template-columns:1fr}   /* cards em 1 coluna */
+  .grid-cpf{grid-template-columns:1fr}
+}

@@ -1,0 +1,132 @@
+/* =======================================================
+   CSS EXCLUSIVO PARA A TELA DE APONTAMENTO (COM SUA SUGESTÃO)
+   ======================================================= */
+
+/* ---------- Tokens e Variáveis Globais ---------- */
+:root {
+    --bg: #F4F2F7;
+    --surface: #ffffff;
+    --border-color: #E5E5E5;
+    --text: #20262e;
+    --muted: #6b7280;
+    --green-100: #E7F4E8;   --green: #68A570;
+    --amber-100: #FFF8E5;   --amber: #D8A20E;
+    --blue-100: #E6EFF8;    --blue: #5C7BA1;
+    --red-100: #F9EAEB;     --red: #C7757D;
+    --radius: 8px;
+    --shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+/* ---------- Estilos Base ---------- */
+* { box-sizing: border-box; }
+html { height: 100%; }
+body {
+    height: 100%;
+    margin: 0;
+    font-family: 'Nunito Sans', sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.app-wrapper {
+    width: 1240px;
+    height: 800px;
+    background: var(--bg);
+    overflow: hidden;
+    box-shadow: 0 14px 40px rgba(16, 24, 40, 0.12);
+    border-radius: 12px;
+}
+.card {
+    background: var(--surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+}
+
+/* =======================================================
+   ESTILOS PARA A TELA DE APONTAMENTO -> USA '.shell'
+   ======================================================= */
+.shell {
+    padding: 24px;
+    display: grid;
+    grid-template-columns: 1fr 458px; 
+    grid-template-rows: auto 1fr; /* Linha superior automática, segunda ocupa o resto */
+    gap: 24px;
+    height: 100%;
+}
+
+/* --- Posicionamento dos Itens na Grade --- */
+.shell .header-time { grid-column: 1 / 2; grid-row: 1 / 2; }
+.shell .logo-card { grid-column: 2 / 3; grid-row: 1 / 2; }
+.shell .preview { grid-column: 1 / 2; grid-row: 2 / 3; min-height: 0; }
+.shell .manual { grid-column: 2 / 3; grid-row: 2 / 3; min-height: 0; }
+
+/* --- Componentes --- */
+.header-time {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 24.13px;
+    height: 172px; /* Mantemos a altura do card de hora */
+}
+.header-time .time { font-size: 75.39px; font-weight: 200; line-height: 96.5px; color: #4A5C60; }
+.date-wrapper { display: flex; flex-direction: column; }
+.day-of-week, .full-date { font-weight: 700; font-size: 24.13px; line-height: 36.19px; color: #4A5C60; }
+
+.logo-card {
+    height: 86px; /* SUA SUGESTÃO APLICADA! */
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+}
+.logo-img-sidebar {
+    max-height: 96px; /* SUA SUGESTÃO APLICADA! */
+    max-width: 80%;
+    object-fit: contain;
+}
+
+.preview {
+    padding: 24px;
+    gap: 24px;
+}
+.video-mock { flex-grow: 1; background-color: #F0F0F0; border-radius: 4px; }
+.caption { width: 100%; height: 58px; flex-shrink: 0; border-radius: 8px; display: flex; align-items: center; justify-content: center; gap: 12px; font-family: 'Nunito Sans', sans-serif; font-weight: 700; font-size: 26.51px; line-height: 39.77px; color: #4A5C60; }
+.caption--entrada { background-color: var(--green-100); }
+.caption--pausa { background-color: var(--amber-100); }
+.caption--retorno { background-color: var(--blue-100); }
+.caption--saida { background-color: var(--red-100); }
+.action-icon { stroke: currentColor; }
+
+.manual {
+    padding: 24px;
+    gap: 16px;
+}
+.manual h3 { margin: 0; font-family: 'Nunito Sans', sans-serif; font-weight: 600; font-size: 34px; line-height: 48px; color: #000000; flex-shrink: 0; }
+.manual p { margin: 0; font-family: 'Nunito Sans', sans-serif; font-weight: 400; font-size: 24px; line-height: 32px; color: #666666; flex-shrink: 0; }
+.input-box { width: 100%; height: 64px; background: #F0F0F0; border-radius: 8px; display: flex; align-items: center; padding: 0 16px; font-size: 24px; font-family: 'Nunito Sans', sans-serif; flex-shrink: 0; }
+.keypad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; flex-shrink: 0; }
+.key { height: 70px; border: 1px solid var(--border-color); background-color: #F8F8F8; border-radius: 8px; font-size: 24px; font-weight: 600; font-family: 'Nunito Sans', sans-serif; cursor: pointer; transition: background-color 0.15s; }
+.key:hover { background-color: #EAEAEA; }
+.key--erase { grid-column: 2 / 4; }
+.spacer {
+    flex-grow: 1; /* O .spacer está de volta para empurrar o botão */
+}
+.help {
+    display: flex;
+    justify-content: center;
+    flex-shrink: 0;
+}
+.btn-help { 
+    width: 100%; 
+    height: 56px; 
+    border-radius: 8px; background-color: #F0F8FF; border: 1.5px solid #045B8F; color: #045B8F; 
+    display: flex; align-items: center; justify-content: center; gap: 8px; 
+    font-family: 'Nunito Sans', sans-serif; font-weight: 700; font-size: 16px; text-decoration: none; 
+    cursor: pointer; transition: background-color 0.15s; 
+    flex-shrink: 0;
+}
+.btn-help:hover { background-color: #E0F0FF; }

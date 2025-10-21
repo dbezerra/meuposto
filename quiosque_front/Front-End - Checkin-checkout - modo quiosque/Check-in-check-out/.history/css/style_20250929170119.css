@@ -1,0 +1,152 @@
+/* ---------- Tokens (tema claro do protótipo) ---------- */
+:root{
+  --bg: #eef2f6;              /* fundo da página */
+  --surface: #ffffff;         /* cartões */
+  --border: #e5e7eb;          /* bordas */
+  --text: #20262e;            /* texto principal */
+  --muted: #6b7280;           /* texto secundário */
+
+  --brand: #ff2d55;
+
+  /* cores dos tipos */
+  --green: #1aa56b;           /* Entrada */
+  --green-100:#e6f6ef;
+  --amber: #d6a300;           /* Pausa */
+  --amber-100:#fbf3d8;
+  --blue: #3155c9;            /* Retorno */
+  --blue-100:#e4e9fb;
+  --red: #d6455d;             /* Saída */
+  --red-100:#f9e6ea;
+
+  --radius: 12px;
+  --shadow: 0 6px 22px rgba(16,24,40,.06);
+}
+
+/* ---------- Base ---------- */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font:16px/1.45 Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color:var(--text);
+  background:var(--bg);
+}
+
+/* Forçar dimensões fixas do layout (tablet 1280x800) */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--bg);
+  height: 100vh;
+  margin: 0;
+}
+
+.app-wrapper {
+  width: 1280px;
+  height: 800px;
+  background: var(--bg);
+  overflow: hidden;   /* impede rolagem indesejada */
+  box-shadow: 0 0 20px rgba(0,0,0,0.12);
+  border-radius: 10px;
+}
+
+
+.container{
+  max-width:1120px;
+  margin:26px auto;
+  padding:0 16px;
+  display:grid;
+  grid-template-columns: 1fr 300px;
+  gap:18px;
+}
+
+/* ---------- Header cards ---------- */
+.card{background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow)}
+.header-time{grid-column:1/2; padding:28px}
+.header-time .time{font-size:56px; font-weight:600}
+.header-time .date{color:var(--muted); margin-top:6px; font-weight:600}
+.header-logo{grid-column:2/3; display:grid; place-items:center; padding:18px}
+.logo{color:var(--brand); font-weight:900; font-size:42px}
+
+/* ---------- Home (ações + últimas marcações) ---------- */
+.main{grid-column:1/2; padding:20px}
+.main h2{margin:0 0 6px}
+.hint{color:var(--muted); margin:0 0 16px}
+
+.actions{
+  display:grid; grid-template-columns:repeat(2,1fr); gap:14px;
+}
+.action{
+  display:block; text-decoration:none; color:inherit; background:var(--surface);
+  border:1px solid var(--border); border-radius:12px; padding:16px 16px 18px;
+  box-shadow:var(--shadow); transition:.15s ease; position:relative;
+  min-height:124px;
+}
+.action:hover{transform:translateY(-2px)}
+.action .topbar{position:absolute; left:0; right:0; top:0; height:6px; border-radius:12px 12px 0 0}
+.action .num{font-size:32px; color:#8a96a6; font-weight:500; margin-top:8px}
+.action .label{display:flex; align-items:center; gap:10px; margin-top:18px; font-weight:700}
+.badge{display:inline-grid; place-items:center; width:32px; height:32px; border-radius:7px; font-size:18px}
+
+/* cores dos cards */
+.action--entrada .topbar{background:var(--green)}
+.action--entrada .badge{background:var(--green-100); color:var(--green)}
+.action--entrada{background:var(--green-100)}
+
+.action--pausa .topbar{background:var(--amber)}
+.action--pausa .badge{background:var(--amber-100); color:var(--amber)}
+.action--pausa{background:var(--amber-100)}
+
+.action--retorno .topbar{background:var(--blue)}
+.action--retorno .badge{background:var(--blue-100); color:var(--blue)}
+.action--retorno{background:var(--blue-100)}
+
+.action--saida .topbar{background:var(--red)}
+.action--saida .badge{background:var(--red-100); color:var(--red)}
+.action--saida{background:var(--red-100)}
+
+/* sidebar últimas marcações */
+.side{grid-column:2/3; padding:16px}
+.side h3{margin:0 0 12px; font-size:16px}
+.list{display:flex; flex-direction:column; gap:10px}
+.item{display:flex; align-items:center; justify-content:space-between; gap:12px;
+  background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:10px 12px}
+.user{display:flex; align-items:center; gap:10px; min-width:0}
+.avatar{width:28px; height:28px; border-radius:50%; background:#e5e7eb; display:grid; place-items:center; color:#525a67; font-size:12px}
+.name{white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+
+/* pílulas de status (padronizadas) */
+.pill{font-size:12px; font-weight:700; padding:6px 10px; border-radius:999px; border:1px solid transparent}
+.pill.entrada{color:var(--green); background:var(--green-100); border-color:#cce9db}
+.pill.pausa{color:var(--amber); background:var(--amber-100); border-color:#f4e6b6}
+.pill.saida{color:var(--red); background:var(--red-100); border-color:#f4cdd5}
+.pill.retorno{color:var(--blue); background:var(--blue-100); border-color:#cdd6fb}
+
+/* ---------- Página CPF ---------- */
+.grid-cpf{
+  max-width:1120px; margin:26px auto; padding:0 16px;
+  display:grid; grid-template-columns: 1fr 320px; gap:18px;
+}
+.panel{background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow); padding:18px}
+.preview{padding:0}
+.video-mock{aspect-ratio: 16/9; width:100%; background:#cfd6de; border-radius:10px 10px 0 0}
+.caption{display:flex; align-items:center; gap:10px; padding:12px 14px; border-top:4px solid var(--green); border-radius:0 0 10px 10px; background:#f3f8f5; font-weight:700; color:var(--green)}
+
+.manual h3{margin:6px 0 4px; font-size:20px}
+.manual p{margin:0 0 10px; color:var(--muted)}
+.input-box{height:54px; border:1px solid var(--border); background:#eceff3; border-radius:10px; margin-bottom:12px}
+.keypad{
+  display:grid; grid-template-columns: repeat(3,1fr); gap:10px;
+}
+.key{display:grid; place-items:center; height:58px; background:#f2f4f7; border:1px solid var(--border); border-radius:10px; font-weight:700}
+.key--erase{grid-column: 2 / 4; background:#fff7f7; border-color:#f4cdd5; color:var(--red);}
+
+.help{margin-top:14px; display:flex; justify-content:flex-end}
+.btn-help{display:inline-flex; align-items:center; gap:8px; padding:12px 18px; border:2px solid #3c91df; color:#0966bf; background:#e7f2ff; border-radius:10px; font-weight:700}
+
+/* ---------- Responsivo ---------- */
+@media (max-width: 980px){
+  .container{grid-template-columns:1fr}
+  .grid-cpf{grid-template-columns:1fr}
+}

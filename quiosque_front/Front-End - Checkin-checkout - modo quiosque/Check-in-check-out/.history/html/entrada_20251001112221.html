@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Entrada</title>
+  <link rel="stylesheet" href="../css/style.css"/>
+</head>
+<body>
+  <div class="app-wrapper">
+    <form class="shell" method="post" action="">
+      <!-- Cabeçalho -->
+      <div class="card header-time">
+        <div class="time">13:23</div>
+        <div class="date">SEGUNDA-FEIRA • 28 DE JULHO DE 2025</div>
+      </div>
+
+      <div class="card header-logo">
+        <img src="../img/totvs-logo.png" alt="TOTVS" class="logo-img"/>
+      </div>
+
+      <!-- Pré-visualização -->
+      <div class="card preview">
+        <div class="video-mock"></div>
+        <div class="caption">Entrada</div>
+      </div>
+
+      <!-- Apontamento manual -->
+      <div class="card manual">
+        <h3>Apontamento manual</h3>
+        <p>Digite seu CPF</p>
+
+        <!-- IMPORTANTE: backend deve preencher o value abaixo a cada submit -->
+        <input
+          type="text"
+          id="cpf-display"
+          name="cpf"
+          class="input-box"
+          autocomplete="off"
+          inputmode="numeric"
+          pattern="[0-9]*"
+          maxlength="11"
+          value=""
+        />
+
+        <div class="keypad">
+          <button class="key" type="submit" name="key" value="1">1</button>
+          <button class="key" type="submit" name="key" value="2">2</button>
+          <button class="key" type="submit" name="key" value="3">3</button>
+
+          <button class="key" type="submit" name="key" value="4">4</button>
+          <button class="key" type="submit" name="key" value="5">5</button>
+          <button class="key" type="submit" name="key" value="6">6</button>
+
+          <button class="key" type="submit" name="key" value="7">7</button>
+          <button class="key" type="submit" name="key" value="8">8</button>
+          <button class="key" type="submit" name="key" value="9">9</button>
+
+          <button class="key" type="submit" name="key" value="0">0</button>
+          <button class="key key--erase" type="submit" name="key" value="backspace">Apagar</button>
+        </div>
+
+        <div class="spacer"></div>
+        <div class="help">
+          <button class="btn-help" type="button">❓ Ajuda</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</body>
+</html>

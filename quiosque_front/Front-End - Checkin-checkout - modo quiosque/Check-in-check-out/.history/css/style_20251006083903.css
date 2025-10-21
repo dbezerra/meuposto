@@ -1,0 +1,322 @@
+/* ---------- Tokens (tema claro do protótipo) ---------- */
+:root {
+    /* Cores de fundo atualizadas */
+    --bg: #F4F2F7;
+    --surface: #ffffff;
+    --border: #e5e7eb;
+    --text: #20262e;
+    --muted: #6b7280;
+
+    /* Cores dos cards de ação (tons mais claros como no protótipo) */
+    --green-100: #DFF0D8;
+    --green: #5CB85C;
+    --amber-100: #FCF8E3;
+    --amber: #F0AD4E;
+    --blue-100: #D9EDF7;
+    --blue: #5BC0DE;
+    --red-100: #F2DEDE;
+    --red: #D9534F;
+    
+    /* Cores dos tags de status (conforme especificado) */
+    --color-positive-bg: #DEF7ED;
+    --color-positive-text: #0F5236;
+    --color-warning-bg: #FCF6E3;
+    --color-warning-text: #473400;
+    --color-negative-bg: #F6E6E5;
+    --color-negative-text: #9B2D27;
+    --color-info-bg: #E3E9F7;
+    --color-info-text: #173782;
+
+    --radius: 16px; /* Aumentei um pouco o raio para combinar com o protótipo */
+    --shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+/* ---------- Base ---------- */
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    /* FONTE PRINCIPAL ALTERADA PARA NUNITO SANS */
+    font-family: 'Nunito Sans', sans-serif;
+    color: var(--text);
+    background: var(--bg);
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.app-wrapper {
+    width: 1280px;
+    height: 800px;
+    background: var(--bg);
+    overflow: hidden;
+    box-shadow: 0 14px 40px rgba(16, 24, 40, 0.12);
+    border-radius: 12px;
+}
+
+.card {
+    background: var(--surface);
+    border: none; /* Removida a borda padrão para um look mais limpo */
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+/* =======================================================
+   HOME
+   ======================================================= */
+.container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 24px;
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    grid-template-rows: auto 1fr; /* Linha do header automática, resto preenche */
+    gap: 24px;
+    height: 100%;
+}
+
+.header-time {
+    grid-column: 1/2;
+    background: #FFFFFF;
+    border: 1px solid #E5E5E5;
+    border-radius: 8px;
+    padding: 16px;
+    display: flex;
+
+    height: 172px;            
+    justify-content: center;   
+    align-items: center;      
+
+    gap: 11px;
+}
+
+.header-time .time {
+    /* Tipografia: 13:23 */
+    font-size: 75.39px;
+    font-weight: 200;
+    line-height: 96.5px;
+    letter-spacing: 0px;
+}
+
+
+.date-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.day-of-week,.full-date {
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 700;
+    font-size: 24.13px;
+    line-height: 36.19px; /* Altura de linha que cria o espaçamento vertical */
+    letter-spacing: 0px;
+    color: #555; /* Cor do texto secundário */
+}
+
+.header-logo {
+    grid-column: 2/3;
+    grid-row: 1/2;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+}
+
+.logo-img {
+    /* LOGO MAIOR */
+    max-width: 200px; 
+    max-height: 80px;
+    object-fit: contain;
+}
+
+.main {
+    grid-column: 1/2;
+    grid-row: 2/3;
+    padding: 32px;
+}
+.main h2 {
+    /* Tipografia: Boa tarde! */
+    margin: 0 0 4px;
+    font-weight: 600;
+    font-size: 34px;
+    line-height: 48px;
+    letter-spacing: 0px;
+}
+.hint {
+    color: var(--muted);
+    margin: 0 0 24px;
+    font-size: 18px;
+}
+
+.actions {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    height: calc(100% - 90px); /* Ajuste para ocupar o espaço do card */
+}
+
+.action {
+    display: flex; /* Mudei para flex para melhor controle */
+    flex-direction: column;
+    justify-content: space-between;
+    text-decoration: none;
+    color: inherit;
+    border: none;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: none; /* Sombra já está no .card */
+    transition: 0.15s ease;
+    position: relative;
+    min-height: 124px;
+}
+.action:hover {
+    transform: translateY(-4px);
+}
+
+.action .topbar {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 4px; /* Barra mais fina como no protótipo */
+    border-radius: 12px 12px 0 0;
+}
+.action .num {
+    /* Tipografia: 1; 2; 3; 4 */
+    font-size: 56.34px;
+    font-weight: 200;
+    line-height: 79.54px;
+    color: #444;
+}
+.action .label {
+    /* Tipografia: Entrada; Pausa; etc. */
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 0; /* Removido para ajuste com flexbox */
+    font-weight: 700;
+    font-size: 26.51px;
+    line-height: 39.77px;
+}
+
+/* Estilo para os novos ícones */
+.action .label i {
+    font-size: 22px;
+}
+
+/* Cores dos cards de ação */
+.action--entrada { background: var(--green-100); }
+.action--entrada .topbar { background: var(--green); }
+.action--entrada .label { color: #3d7a59; }
+
+.action--pausa { background: var(--amber-100); }
+.action--pausa .topbar { background: var(--amber); }
+.action--pausa .label { color: #8a6d3b; }
+
+.action--retorno { background: var(--blue-100); }
+.action--retorno .topbar { background: var(--blue); }
+.action--retorno .label { color: #31708f; }
+
+.action--saida { background: var(--red-100); }
+.action--saida .topbar { background: var(--red); }
+.action--saida .label { color: #a94442; }
+
+/* Sidebar últimas marcações */
+.side {
+    grid-column: 2/3;
+    grid-row: 1/3; /* Ocupa as duas linhas da grid */
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.side h3 {
+    /* Tipografia: Últimas marcações */
+    margin: 0;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+.item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    background: none; /* Itens não tem fundo próprio */
+    border: none; /* nem borda */
+    padding: 0; /* nem padding */
+}
+.user {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+}
+
+/* NOVO ESTILO PARA A IMAGEM DO AVATAR */
+.avatar-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover; /* Garante que a imagem não distorça */
+}
+
+.name {
+    /* Tipografia: Nomes */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+}
+
+/* ESTILOS DOS STATUS (PILL) ATUALIZADOS */
+.pill {
+    font-size: 12px;
+    font-weight: 600; /* Um pouco mais de peso para legibilidade */
+    padding: 4px 12px;
+    border-radius: 999px;
+    border: none;
+    line-height: 140%;
+}
+.pill.entrada {
+    color: var(--color-positive-text);
+    background: var(--color-positive-bg);
+}
+.pill.pausa {
+    color: var(--color-warning-text);
+    background: var(--color-warning-bg);
+}
+.pill.saida {
+    color: var(--color-negative-text);
+    background: var(--color-negative-bg);
+}
+.pill.retorno {
+    color: var(--color-info-text);
+    background: var(--color-info-bg);
+}
+
+/* Removendo estilos não utilizados para esta tela */
+.shell, .preview, .manual, .keypad, .help {
+    /* Deixei em branco para não interferir, mas você pode removê-los se não forem usados em outras páginas */
+}

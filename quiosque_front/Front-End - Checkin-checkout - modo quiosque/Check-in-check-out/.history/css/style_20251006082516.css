@@ -1,0 +1,251 @@
+/* --- RESET BÁSICO E VARIÁVEIS GLOBAIS --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Cores dos tags de status */
+    --color-positive-bg: #DEF7ED;
+    --color-positive-text: #0F5236;
+    --color-warning-bg: #FCF6E3;
+    --color-warning-text: #473400;
+    --color-negative-bg: #F6E6E5;
+    --color-negative-text: #9B2D27;
+    --color-info-bg: #E3E9F7;
+    --color-info-text: #173782;
+
+    /* Cores dos cards de ação */
+    --color-green: #DFF0D8;
+    --color-yellow: #FCF8E3;
+    --color-blue: #D9EDF7;
+    --color-red: #F2DEDE;
+}
+
+body {
+    font-family: 'Nunito Sans', sans-serif;
+    background-color: #F4F2F7; /* Cor de fundo aproximada do protótipo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 2rem;
+}
+
+.main-container {
+    display: grid;
+    grid-template-areas:
+        "header sidebar"
+        "content sidebar";
+    grid-template-columns: 1fr 400px; /* Divide o espaço entre conteúdo principal e sidebar */
+    grid-template-rows: auto 1fr;
+    gap: 24px;
+    width: 100%;
+    max-width: 1280px;
+    height: 800px;
+}
+
+/* --- CABEÇALHO (HORA E LOGO) --- */
+.page-header {
+    grid-area: header;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.clock-info {
+    text-align: left;
+}
+
+.time {
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 200;
+    font-size: 75.39px;
+    line-height: 96.5px;
+    color: #333;
+}
+
+.date {
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 700;
+    font-size: 24.13px;
+    line-height: 36.19px;
+    color: #555;
+}
+
+.logo-container {
+    background-color: #FFFFFF;
+    padding: 24px;
+    border-radius: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.logo-container img {
+    max-width: 180px; /* Aumentado o tamanho do logo */
+    height: auto;
+}
+
+/* --- ÁREA DE CONTEÚDO PRINCIPAL --- */
+.content-area {
+    grid-area: content;
+}
+
+.main-card {
+    background-color: #FFFFFF;
+    padding: 32px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    height: 100%;
+}
+
+.main-card h2 {
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 600;
+    font-size: 34px;
+    line-height: 48px;
+    color: #222;
+}
+
+.subtitle {
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    color: #666;
+    margin-top: 4px;
+    margin-bottom: 24px;
+}
+
+.actions-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    height: calc(100% - 100px); /* Ajuste para preencher o espaço */
+}
+
+.action-card {
+    border-radius: 12px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
+.action-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Cores dos cards de ação */
+.action-card.color-green { background-color: var(--color-green); border-top: 4px solid #5CB85C; }
+.action-card.color-yellow { background-color: var(--color-yellow); border-top: 4px solid #F0AD4E; }
+.action-card.color-blue { background-color: var(--color-blue); border-top: 4px solid #5BC0DE; }
+.action-card.color-red { background-color: var(--color-red); border-top: 4px solid #D9534F; }
+
+.action-number {
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 200;
+    font-size: 56.34px;
+    line-height: 79.54px;
+    color: #444;
+}
+
+.action-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 700;
+    font-size: 26.51px;
+    line-height: 39.77px;
+    color: #333;
+}
+
+.action-label i {
+    font-size: 22px; /* Tamanho do ícone */
+}
+
+/* --- SIDEBAR (ÚLTIMAS MARCAÇÕES) --- */
+.sidebar {
+    grid-area: sidebar;
+    background-color: #FFFFFF;
+    padding: 24px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.sidebar-title {
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #555;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.log-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.log-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.user-name {
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+    color: #333;
+    flex-grow: 1; /* Faz o nome ocupar o espaço disponível */
+}
+
+.status-tag {
+    padding: 4px 12px;
+    border-radius: 999px; /* Efeito de pílula */
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 140%;
+}
+
+.status-tag.status-entrada {
+    background-color: var(--color-positive-bg);
+    color: var(--color-positive-text);
+}
+
+.status-tag.status-pausa {
+    background-color: var(--color-warning-bg);
+    color: var(--color-warning-text);
+}
+
+.status-tag.status-saida {
+    background-color: var(--color-negative-bg);
+    color: var(--color-negative-text);
+}
+
+/* O status "Retorno" não está no protótipo, mas aqui está o código para ele */
+.status-tag.status-retorno {
+    background-color: var(--color-info-bg);
+    color: var(--color-info-text);
+}

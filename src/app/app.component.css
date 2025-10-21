@@ -1,0 +1,6 @@
+.row { display: flex; gap: 24px; align-items: flex-start; }
+.video { position: relative; }
+video, canvas { width: 640px; height: 480px; background: #000; display: block; }
+.controls { min-width: 320px; }
+.group { margin: 8px 0; display: flex; gap: 8px; flex-wrap: wrap; }
+pre { background: #111; color: #0f0; padding: 8px; max-height: 220px; overflow: auto; }

@@ -1,0 +1,107 @@
+<div class="app-wrapper">
+  <section class="container">
+    
+    <div class="card header-time">
+      <div class="time">{{ agora | date:'HH:mm' }}</div>
+      <div class="date-wrapper">
+        <span class="day-of-week">{{ agora | date:'EEEE' | uppercase }}</span>
+        <span class="full-date">{{ agora | date:'dd \'de\' MMMM \'de\' y' | titlecase }}</span>
+      </div>
+    </div>
+    
+    <div class="card main">
+      <h2>Boa tarde!</h2>
+      <p class="hint">Selecione o tipo de marcação</p>
+      <div class="actions">
+        <a [routerLink]="['/checkin','entrada']" class="action action--entrada">
+          <div class="topbar"></div>
+          <div class="num">1</div>
+          <div class="label">
+            <svg class="action-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m9 18 6-6-6-6"></path>
+            </svg>
+            Entrada
+          </div>
+        </a>
+        <a [routerLink]="['/checkin','pausa']" class="action action--pausa">
+          <div class="topbar"></div>
+          <div class="num">2</div>
+          <div class="label">
+            <svg class="action-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10 2v2"></path><path d="M14 2v2"></path><path d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1"></path><path d="M6 2v2"></path>
+            </svg>
+            Pausa
+          </div>
+        </a>
+        <a [routerLink]="['/checkin','retorno']" class="action action--retorno">
+          <div class="topbar"></div>
+          <div class="num">3</div>
+          <div class="label">
+            <svg class="action-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10 2v2"></path><path d="M14 2v2"></path><path d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1"></path><path d="M6 2v2"></path>
+            </svg>
+            Retorno
+          </div>
+        </a>
+        <a [routerLink]="['/checkin','saida']" class="action action--saida">
+          <div class="topbar"></div>
+          <div class="num">4</div>
+          <div class="label">
+            <svg class="action-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m9 18 6-6-6-6"></path>
+            </svg>
+            Saída
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="sidebar-wrapper">
+      <div class="card logo-card">
+        <img src="assets/img/totvs-logo.png" alt="Logo TOTVS" class="logo-img-sidebar">
+      </div>
+      
+      <aside class="card side">
+        <h3>Últimas marcações</h3>
+        <div class="list">
+          <div class="item">
+            <div class="user">
+              <img src="https://i.pravatar.cc/40?u=1" alt="Avatar" class="avatar-img">
+              <div class="name">Julia Cristina Cameira</div>
+            </div>
+            <span class="pill entrada">Entrada</span>
+          </div>
+          <div class="item">
+            <div class="user">
+              <img src="https://i.pravatar.cc/40?u=2" alt="Avatar" class="avatar-img">
+              <div class="name">Marco Antonio Silva</div>
+            </div>
+            <span class="pill pausa">Pausa</span>
+          </div>
+          <div class="item">
+            <div class="user">
+              <img src="https://i.pravatar.cc/40?u=3" alt="Avatar" class="avatar-img">
+              <div class="name">Ana Paula Gomes</div>
+            </div>
+            <span class="pill saida">Saída</span>
+          </div>
+          <div class="item">
+            <div class="user">
+              <img src="https://i.pravatar.cc/40?u=4" alt="Avatar" class="avatar-img">
+              <div class="name">Ricardo Alves</div>
+            </div>
+            <span class="pill entrada">Entrada</span>
+          </div>
+          <div class="item">
+            <div class="user">
+              <img src="https://i.pravatar.cc/40?u=5" alt="Avatar" class="avatar-img">
+              <div class="name">Doralice Motta</div>
+            </div>
+            <span class="pill retorno">Retorno</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+  </section>
+</div>

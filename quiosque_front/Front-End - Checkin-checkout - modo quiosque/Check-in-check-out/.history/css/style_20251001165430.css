@@ -1,0 +1,435 @@
+/* ---------- Tokens (tema claro do protótipo) ---------- */
+:root {
+  --bg: #eef2f6; /* fundo da página */
+  --surface: #ffffff; /* cartões */
+  --border: #e5e7eb; /* bordas */
+  --text: #20262e; /* texto principal */
+  --muted: #6b7280; /* texto secundário */
+
+  --brand: #ff2d55;
+
+  /* cores dos tipos */
+  --green: #1aa56b; /* Entrada */
+  --green-100: #e6f6ef;
+  --amber: #d6a300; /* Pausa */
+  --amber-100: #fbf3d8;
+  --blue: #3155c9; /* Retorno */
+  --blue-100: #e4e9fb;
+  --red: #d6455d; /* Saída */
+  --red-100: #f9e6ea;
+
+  --radius: 12px;
+  --shadow: 0 6px 22px rgba(16, 24, 40, 0.06);
+}
+
+/* ---------- Base ---------- */
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font: 16px/1.45 Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial,
+    sans-serif;
+  color: var(--text);
+  background: var(--bg);
+}
+
+/* Forçar dimensões fixas do layout (tablet 1280x800), centralizado */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.app-wrapper {
+  width: 1280px;
+  height: 800px;
+  background: var(--bg);
+  overflow: hidden; /* impede rolagem indesejada */
+  box-shadow: 0 14px 40px rgba(16, 24, 40, 0.12);
+  border-radius: 12px;
+}
+
+/* ---- Cartões base ---- */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+/* =======================================================
+   HOME (mantido caso você use essa tela)
+   ======================================================= */
+.container {
+  max-width: 100%;
+  margin: 16px auto;
+  padding: 0 16px;
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 18px;
+}
+.header-time {
+  grid-column: 1/2;
+  padding: 28px;
+}
+.header-time .time {
+  font-size: 56px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+.header-time .date {
+  color: var(--muted);
+  margin-top: 6px;
+  font-weight: 600;
+}
+.header-logo {
+  grid-column: 2/3;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  margin-right: 1;
+}
+.logo {
+  color: var(--brand);
+  font-weight: 900;
+  font-size: 42px;
+}
+
+.main {
+  grid-column: 1/2;
+  padding: 20px;
+}
+.main h2 {
+  margin: 0 0 6px;
+}
+.hint {
+  color: var(--muted);
+  margin: 0 0 16px;
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+.action {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px 18px 20px;
+  box-shadow: var(--shadow);
+  transition: 0.15s ease;
+  position: relative;
+  min-height: 124px;
+}
+.action:hover {
+  transform: translateY(-2px);
+}
+.action .topbar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 6px;
+  border-radius: 12px 12px 0 0;
+}
+.action .num {
+  font-size: 32px;
+  color: #8a96a6;
+  font-weight: 500;
+  margin-top: 8px;
+}
+.action .label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 18px;
+  font-weight: 700;
+}
+.badge {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  font-size: 18px;
+}
+
+/* cores dos cards */
+.action--entrada .topbar {
+  background: var(--green);
+}
+.action--entrada .badge {
+  background: var(--green-100);
+  color: var(--green);
+}
+.action--entrada {
+  background: var(--green-100);
+}
+
+.action--pausa .topbar {
+  background: var(--amber);
+}
+.action--pausa .badge {
+  background: var(--amber-100);
+  color: var(--amber);
+}
+.action--pausa {
+  background: var(--amber-100);
+}
+
+.action--retorno .topbar {
+  background: var(--blue);
+}
+.action--retorno .badge {
+  background: var(--blue-100);
+  color: var(--blue);
+}
+.action--retorno {
+  background: var(--blue-100);
+}
+
+.action--saida .topbar {
+  background: var(--red);
+}
+.action--saida .badge {
+  background: var(--red-100);
+  color: var(--red);
+}
+.action--saida {
+  background: var(--red-100);
+}
+
+/* sidebar últimas marcações */
+.side {
+  grid-column: 2/3;
+  padding: 16px;
+}
+.side h3 {
+  margin: 0 0 12px;
+  font-size: 16px;
+}
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+.user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+.avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #e5e7eb;
+  display: grid;
+  place-items: center;
+  color: #525a67;
+  font-size: 12px;
+}
+.name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* status (padronizadas) */
+.pill {
+  font-size: 12px;
+  font-weight: 700;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+}
+.pill.entrada {
+  color: var(--green);
+  background: var(--green-100);
+  border-color: #cce9db;
+}
+.pill.pausa {
+  color: var(--amber);
+  background: var(--amber-100);
+  border-color: #f4e6b6;
+}
+.pill.saida {
+  color: var(--red);
+  background: var(--red-100);
+  border-color: #f4cdd5;
+}
+.pill.retorno {
+  color: var(--blue);
+  background: var(--blue-100);
+  border-color: #cdd6fb;
+}
+
+/* =======================================================
+   TELA DE CPF (mínimos ajustes de medidas)
+   ======================================================= */
+
+/* Grid fixo do tablet: 820px (conteúdo) + 420px (manual) com gap 20px */
+.shell {
+  display: grid;
+  grid-template-columns: 820px 420px;
+  grid-auto-rows: max-content;
+  gap: 20px;
+  padding: 20px;
+}
+
+/* Header cartões — altura 140px */
+.header-time,
+.header-logo {
+  height: 140px;
+}
+.header-time {
+  padding: 26px 28px;
+}
+.header-time .time {
+  font-size: 56px;
+  font-weight: 700;
+  line-height: 1;
+}
+.header-time .date {
+  margin-top: 8px;
+  color: var(--muted);
+  font-weight: 600;
+}
+.header-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.logo {
+  font-size: 44px;
+  letter-spacing: 0.5px;
+}
+
+/* Bloco esquerda (preview) — altura 600px */
+.preview {
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.video-mock {
+  flex: 1;
+  background: #cfd6de;
+}
+.caption {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px;
+  border-top: 4px solid var(--green);
+  background: #f5fbf7;
+  color: var(--green);
+  font-weight: 700;
+}
+
+/* Bloco direito (apontamento manual) — altura 600px */
+.manual {
+  height: 600px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  margin-right: 16px;
+}
+.manual h3 {
+  margin: 0 0 2px;
+  font-size: 22px;
+}
+.manual p {
+  margin: 0 0 10px;
+  color: var(--muted);
+}
+.input-box {
+  height: 64px;
+  border: 1px solid var(--border);
+  background: #eef2f6;
+  border-radius: 10px;
+  margin-bottom: 14px;
+}
+
+/* Teclado numérico: botões iguais, alinhamento */
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.key {
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f6f7fb;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 20px;
+}
+.key:active {
+  transform: scale(0.98);
+}
+.key--erase {
+  grid-column: 2 / 4;
+  background: #fff7f8;
+  border-color: #f3c7d0;
+  color: var(--red);
+}
+
+/* empurra o botão Ajuda para o rodapé do cartão */
+.spacer {
+  flex: 1;
+}
+.help {
+  display: flex;
+  justify-content: flex-end;
+}
+.btn-help {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 44px;
+  padding: 0 18px;
+  border-radius: 10px;
+  border: 2px solid #3c91df;
+  color: #0966bf;
+  background: #e7f2ff;
+  font-weight: 700;
+}
+
+.logo-img {
+  max-width: 180px; /* largura máxima */
+  max-height: 60px; /* altura máxima */
+  object-fit: contain;
+}
+
+/* ---------- Responsivo ---------- */
+@media (max-width: 980px) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+  .shell {
+    grid-template-columns: 1fr;
+  }
+}

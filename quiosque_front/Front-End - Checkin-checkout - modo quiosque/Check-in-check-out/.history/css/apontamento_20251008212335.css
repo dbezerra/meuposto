@@ -1,0 +1,261 @@
+:root {
+  --bg: #f4f2f7;
+  --surface: #ffffff;
+  --border: #e5e5e5;
+  --text: #20262e;
+  --muted: #666666;
+  --accent: #4a5c60;
+  --entrada: #e6f6ef;
+  --pausa: #fbf3d8;
+  --retorno: #e4e9fb;
+  --saida: #f9eaeb;
+  --radius: 8px;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: "Nunito Sans", system-ui, Arial, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+}
+
+.app-wrapper {
+  width: 1280px;
+  height: 800px;
+}
+
+.shell {
+  height: 100%;
+  padding: 24px;
+  display: grid;
+  grid-template-columns: 687px 457.5px; 
+  column-gap: 24px;
+}
+
+.col {
+  display: grid;
+}
+
+.col-left {
+  grid-template-rows: 172px 522px;
+  row-gap: 24px;
+}
+
+.col-right {
+  grid-template-rows: 117px 518.34px 56px;
+  row-gap: 12px; 
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.header-time {
+  padding: 16px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 24.13px;
+  height: 172px; 
+}
+
+.time {
+  font-weight: 200;
+  font-size: 75.39px;
+  line-height: 96.5px;
+  color: var(--accent);
+}
+
+.date-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.day-of-week,
+.full-date {
+  font-weight: 700;
+  font-size: 24.13px;
+  line-height: 36.19px;
+  color: var(--accent);
+}
+
+.logo-card {
+  padding: 16px 0; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-img-sidebar {
+  width: 454px;
+  height: 85px;
+  display: block;
+  object-fit: contain;
+}
+
+.preview {
+  padding: 24px;
+  height: 522px;
+  display: flex;
+  flex-direction: column;
+  gap: 0; 
+}
+
+.video-mock {
+  width: 632px;
+  height: 474px;
+  background: #efefef;
+  border-radius: 4px;
+  margin: 0 auto;
+}
+
+.caption {
+  width: 632.092px;
+  height: 58px;
+  background: #def7ed; 
+  border-radius: 4.97px;
+  border-top: 4px solid #1aa56b; 
+  margin: 0;
+  align-self: flex-start;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 16px;
+  gap: 12px;
+  font-family: "Nunito Sans", sans-serif;
+  font-weight: 700;
+  font-size: 26.51px;
+  line-height: 39.77px;
+  letter-spacing: 0;
+  color: #4a5c60;
+}
+
+.caption--entrada {
+  background: var(--entrada);
+}
+
+.caption--pausa {
+  background: var(--pausa);
+}
+
+.caption--retorno {
+  background: var(--retorno);
+}
+
+.caption--saida {
+  background: var(--saida);
+}
+
+.action-icon{
+  color: #1AA56B;
+  stroke: currentColor;
+}
+
+.manual {
+  padding: 16px;
+  height: 518.34px; 
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.manual h3 {
+  margin: 0;
+  font-weight: 600;
+  font-size: 34px;
+  line-height: 48px;
+  color: #000;
+  align-self: center;
+
+}
+
+.manual p {
+  margin: 0;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 32px;
+  color: var(--muted);
+  align-self: center;
+}
+
+.input-box {
+  height: 71.28px; 
+  width: 100%;
+  background: #f0f0f0;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.key {
+  height: 70px;
+  border: 1px solid var(--border);
+  background: #f8f8f8;
+  border-radius: 8px;
+  font-size: 24px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.key:hover {
+  background: #eaeaea;
+}
+
+.key--erase {
+  grid-column: 2 / 4;
+}
+
+.help {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn-help {
+  width: 457px;
+  height: 56px;
+  min-height: 56px;
+  border-radius: 8px;
+  background: #f0f8ff;
+  border: 1.5px solid #045b8f;
+  color: #045b8f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1;
+  text-decoration: none;
+}
+.btn-help:hover {
+  background: #e0f0ff;
+}

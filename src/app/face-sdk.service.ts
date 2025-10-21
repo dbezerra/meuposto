@@ -215,12 +215,12 @@ export class FaceSdkService {
             params, headers, responseType: 'text'
           }).pipe(
             // Adiciona timeout e retry para melhor compatibilidade com Safari
-            catchError(error => {
+            catchError((error: any) => {
               console.warn('Erro na requisição HTTP:', error);
               throw error;
             })
           )
-        );
+        ) as string;
         
         console.log('📥 Resposta recebida da API:', raw.substring(0, 100) + '...');
 

@@ -17,3 +17,26 @@ bootstrapApplication(AppComponent, {
     })
   ]
 }).catch(console.error);
+
+// Fallback para Safari quando service worker falha
+if (typeof window !== 'undefined' && !isDevMode()) {
+  window.addEventListener('error', (event) => {
+    if (event.message && event.message.includes('FetchEvent.respondWith')) {
+      console.warn('Service worker error detected, attempting recovery...');
+      // Tenta recarregar o service worker
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then(registrations => {
+          registrations.forEach(registration => {
+            registration.unregister().then(() => {
+              console.log('Service worker unregistered due to error');
+              // Recarrega a página após um pequeno delay
+              setTimeout(() => {
+                window.location.reload();
+              }, 1000);
+            });
+          });
+        });
+      }
+    }
+  });
+}

@@ -177,11 +177,18 @@ export class FaceSdkService {
     /** Baixa fotos da API e cadastra no tracker. Chamar 1x ao abrir o app. */
     async seedFromPortalPrestador(filial: string = 'D MG 01', force = false) {
       
-      if (this.seeding || this.seededOnce) return;
-      if (!this.FSDK || this.tracker === -1) await this.init(); // garante SDK
+      if (this.seeding || this.seededOnce) {
+        console.log('⚠️ Seed já em andamento ou já executado. Seeding:', this.seeding, 'SeededOnce:', this.seededOnce);
+        return;
+      }
+      if (!this.FSDK || this.tracker === -1) {
+        console.log('🔧 Inicializando SDK...');
+        await this.init(); // garante SDK
+      }
 
       this.seeding = true;
       try {
+        console.log('📡 Fazendo chamada para API do Portal Prestador...');
 
         // const results = resp?.results ?? [];
         const params = new HttpParams().set('filial', filial);
@@ -193,9 +200,13 @@ export class FaceSdkService {
             params, headers, responseType: 'text'
           })
         );
+        
+        console.log('📥 Resposta recebida da API:', raw.substring(0, 100) + '...');
 
         const resp = this.normalizePortalJson(raw);   // -> { results: [...] }
         const results = resp.results ?? [];
+        
+        console.log('📊 Resultados encontrados:', results.length);
 
         for (const r of results) {
           try {
@@ -203,6 +214,7 @@ export class FaceSdkService {
             const pngAb = await this.dataUrlToPngArrayBuffer(dataUrl);
             const nome = (r.nome || r.matricula || '').trim() || r.CPF || `id_${r.matricula}`;
             await this.registerFromArrayBuffer(pngAb, nome);
+            console.log('✅ Registrado:', nome);
           } catch (e) {
             console.warn('Seed: falha ao registrar', r?.matricula, e);
           }
@@ -210,6 +222,7 @@ export class FaceSdkService {
           await new Promise(r => setTimeout(r, 0));
         }
         this.seededOnce = true;
+        console.log('🎉 Seed finalizado. Total processado:', results.length);
       } finally {
         this.seeding = false;
       }
@@ -217,7 +230,13 @@ export class FaceSdkService {
 
     /** Chama o seed de forma segura (idempotente) */
     async seedPortalOnce(filial = 'D MG 01') {
-      try { await this.seedFromPortalPrestador(filial); } catch (e) { console.warn('Seed falhou:', e); }
+      console.log('🌱 Iniciando seed do Portal Prestador para filial:', filial);
+      try { 
+        await this.seedFromPortalPrestador(filial); 
+        console.log('✅ Seed do Portal Prestador concluído com sucesso');
+      } catch (e) { 
+        console.error('❌ Seed falhou:', e); 
+      }
     }
 
     

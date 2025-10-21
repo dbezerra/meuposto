@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 
@@ -16,41 +16,71 @@ import { RouterOutlet } from '@angular/router';
     </div>
   `
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   private deferredPrompt: any = null;
   showInstall = false;
 
-  constructor() {
-    if (typeof window !== 'undefined') {
-      window.addEventListener('beforeinstallprompt', (e: Event) => {
-        e.preventDefault();
-        this.deferredPrompt = e as any;
-        const installed = localStorage.getItem('pwaInstalled') === '1';
-        const dismissed = localStorage.getItem('pwaInstallDismissed') === '1';
-        if (!installed && !dismissed) {
-          this.showInstall = true;
-        }
-      });
+  ngOnInit() {
+    this.setupInstallPrompt();
+  }
 
-      window.addEventListener('appinstalled', () => {
-        this.deferredPrompt = null;
-        this.showInstall = false;
-        try { localStorage.setItem('pwaInstalled', '1'); } catch {}
-      });
+  private setupInstallPrompt() {
+    if (typeof window === 'undefined') return;
+
+    // Verifica se já foi instalado ou dispensado
+    const installed = localStorage.getItem('pwaInstalled') === '1';
+    const dismissed = localStorage.getItem('pwaInstallDismissed') === '1';
+    
+    if (installed || dismissed) {
+      return;
     }
+
+    // Listener para o evento beforeinstallprompt
+    window.addEventListener('beforeinstallprompt', (e: Event) => {
+      console.log('beforeinstallprompt triggered');
+      e.preventDefault();
+      this.deferredPrompt = e as any;
+      this.showInstall = true;
+    });
+
+    // Listener para quando o app é instalado
+    window.addEventListener('appinstalled', () => {
+      console.log('App installed');
+      this.deferredPrompt = null;
+      this.showInstall = false;
+      try { localStorage.setItem('pwaInstalled', '1'); } catch {}
+    });
+
+    // Fallback: mostra o banner após 3 segundos se não houve beforeinstallprompt
+    // Isso funciona para desenvolvimento ou quando os critérios PWA não são atendidos
+    setTimeout(() => {
+      if (!this.deferredPrompt && !installed && !dismissed) {
+        console.log('Showing fallback install prompt');
+        this.showInstall = true;
+      }
+    }, 3000);
   }
 
   async install() {
-    if (!this.deferredPrompt) { return; }
-    try {
-      await this.deferredPrompt.prompt();
-      const { outcome } = await this.deferredPrompt.userChoice;
-      if (outcome === 'accepted') {
-        try { localStorage.setItem('pwaInstalled', '1'); } catch {}
+    if (this.deferredPrompt) {
+      // Instalação real via PWA
+      try {
+        await this.deferredPrompt.prompt();
+        const { outcome } = await this.deferredPrompt.userChoice;
+        if (outcome === 'accepted') {
+          try { localStorage.setItem('pwaInstalled', '1'); } catch {}
+        }
+      } finally {
+        this.deferredPrompt = null;
+        this.showInstall = false;
       }
-    } finally {
-      this.deferredPrompt = null;
-      this.showInstall = false;
+    } else {
+      // Fallback: instruções para instalação manual
+      alert('Para instalar o Meu Posto:\n\n' +
+            'Chrome/Edge: Clique no ícone de instalação na barra de endereços\n' +
+            'Firefox: Clique no ícone "+" na barra de endereços\n' +
+            'Safari: Toque em "Compartilhar" e depois "Adicionar à Tela de Início"');
+      this.dismiss();
     }
   }
 
